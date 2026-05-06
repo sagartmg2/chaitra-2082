@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div.fixed {
+        position: fixed;
+        background-color: brown;
+        bottom: 20px;
+        right: 20px;
+        height: 50px;
+        width: 50px;
+      }
+
+      .box {
+        width: 50%;
+        width: 100px;
+        height: 100px;
+        border: 1px solid;
+      }
+
+      .static {
+        position: static;
+      }
+
+      .relative {
+        position: relative;
+        /* background-color: rgb(255,0,0,0.8); */
+        background-color: red;
+        opacity: 0.8;
+        /* margin-top:50px; */
+        /* top: 50px; */
+        left: 50px;
+        /* right:50px; */
+        /* z-index:2; */
+      }
+
+      .absolute {
+        position: absolute;
+        background-color: orange;
+        /* right:10px; */
+        /* left:0px; */
+        z-index: 1;
+        top: 0px;
+        /* right:0px */
+      }
+
+      /* 
+      
+      .sticky {
+        position: sticky;
+      } */
+    </style>
+  </head>
+  <body>
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus,
+      quod.
+    </p>
+    <br />
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus,
+      quod.
+    </p>
+    <br />
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus,
+      quod.
+    </p>
+    <br />
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus,
+      quod.
+    </p>
+    <br />
+    <p>
+      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Repellendus,
+      quod.
+    </p>
+    <br />
+    <div class="box static">static</div>
+    <div class="box relative">relative</div>
+    <div class="box absolute">absolute</div>
+    <div class="box fixed">fixed</div>
+    <div class="box sticky">sticky</div>
+  </body>
+</html>

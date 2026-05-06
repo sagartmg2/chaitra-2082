@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* 1 3 0 */
+      .container #title.title.underline {
+        color: black;
+      }
+
+      /* 1 2 1 */
+      .container p#title.title {
+        color: red;
+      }
+
+      /* 1 1 4 */
+      html body div p#title.title {
+        color: cyan;
+      }
+
+      /* 1 0 4 */
+      html body div p#title {
+        color: red;
+      }
+
+      /* 1 0 1 */
+      p#title {
+        color: cyan;
+      }
+
+      /* 1 0 0 */
+      #title {
+        color: red;
+      }
+
+      /* 1 4 */
+      html body div p.title {
+        color: cyan;
+      }
+
+      /* 1 1 */
+      p.title {
+        color: red;
+      }
+
+      /* 1 0 */
+      .title {
+        color: cyan;
+      }
+
+      /* 0 4 */
+      html body div p {
+        color: red;
+      }
+
+      /* 3 */
+      body div p {
+        color: cyan !important;
+      }
+
+      /* 2 */
+      div p {
+        /* color: red; */
+      }
+
+      p {
+        color: red;
+      }
+
+      /* 1 */
+      p {
+        color: white !important;
+        font-size: 3rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container wrapper">
+      <p id="title" style="color: red" class="title underline">
+        specivficity score
+      </p>
+    </div>
+  </body>
+</html>

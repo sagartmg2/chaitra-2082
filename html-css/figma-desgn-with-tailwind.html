@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      /* @media (min-width: 640px) {
+       .traget {
+        background-color: orange;
+       }
+      }
+
+      @media (min-width: 768px) {
+      .traget {
+        background-color: black;
+       }
+      } */
+      #sidebar.active {
+        /* transform: translateX(0%); */
+        translate: 0%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <span class="hidden h-20 w-20 border p-1">1 0.25rem</span>
+    <span class="hidden h-20 w-20 border p-2">2 0.5rem</span>
+    <span class="hidden h-20 w-20 border p-3">3 0.75</span>
+    <span class="hidden h-20 w-20 border p-4">4 1rem</span>
+    <span class="hidden h-20 w-20 border p-5">5 1.25</span>
+    <span class="hidden h-20 w-20 border p-5">6 1.5</span>
+    <span class="hidden h-20 w-20 border p-12">12 1.5</span>
+    <span
+      class="traget h-20 hidden bg-red-400 sm:bg-orange-400 md:bg-teal-500 md:text-white md:border-4 lg:border-red-500 border-black w-20 border p-19"
+      >19 1.5</span
+    >
+
+    <header>
+      <nav class="bg-[#7E33E0] text-white py-2">
+        <div
+          class="container mx-auto flex flex-col sm:flex-row justify-between"
+        >
+          <div class="flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+            </svg>
+
+            <span>mhhasanul@gmail.com</span>
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+            </svg>
+
+            <span>(12345)67890</span>
+          </div>
+
+          <div>
+            <select>
+              <option>English</option>
+              <option>Nepali</option>
+            </select>
+
+            <select>
+              <option>USD</option>
+              <option>Nepali</option>
+            </select>
+
+            <span>login</span>
+          </div>
+        </div>
+      </nav>
+
+      <nav class="container mx-auto py-2 flex justify-between">
+        <div>Hekto</div>
+
+        <div
+          id="sidebar"
+          class="active p-4 translate-x-[100%] bg-orange-400 fixed top-0 bottom-0 right-0"
+        >
+          <!-- <div
+            id="backdrop"
+            class="bg-[rgba(0,0,0,0.5)] h-screen w-full fixed right-0 left-0 bottom-0 top-0"
+          ></div> -->
+
+          <div id="close-icon">X</div>
+
+          <ul>
+            <li>Home</li>
+            <li>pages</li>
+            <li>products</li>
+          </ul>
+
+          <div>
+            <input />
+
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m21 21-4.34-4.34" />
+              <circle cx="11" cy="11" r="8" />
+            </svg>
+          </div>
+        </div>
+
+        <svg
+          id="menu-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M4 5h16" />
+          <path d="M4 12h16" />
+          <path d="M4 19h16" />
+        </svg>
+      </nav>
+    </header>
+
+    <script>
+      document
+        .getElementById("menu-icon")
+        .addEventListener("click", function () {
+          document.getElementById("sidebar").classList.add("active");
+        });
+
+      document
+        .getElementById("close-icon")
+        .addEventListener("click", function () {
+          document.getElementById("sidebar").classList.remove("active");
+        });
+    </script>
+  </body>
+</html>
