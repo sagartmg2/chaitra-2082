@@ -36,7 +36,7 @@ M - modified files
 > git clone <github_url>
  eg git clone https://github.com/sagartmg2/chaitra-2082
  from next day > git pull
-
+//abinay
 
 
  git brach
