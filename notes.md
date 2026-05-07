@@ -35,12 +35,12 @@ M - modified files
 
 > git clone <github_url>
  eg git clone https://github.com/sagartmg2/chaitra-2082
- pull
+ from next day > git pull
+
+
 
  git brach
-
  git checkout -b display-products
-
  
  branch
  merge
