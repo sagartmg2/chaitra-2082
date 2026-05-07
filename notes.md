@@ -38,7 +38,7 @@ M - modified files
  from next day > git pull
 //abinay
 
-
+// changes from my_branch and pushed to github
  git brach
  git checkout -b display-products
  
