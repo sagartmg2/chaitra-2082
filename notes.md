@@ -42,6 +42,7 @@ M - modified files
  git brach
  git checkout -b display-products
  
+ //creating pull request from my_branch
  branch
  merge
  merge conflit
