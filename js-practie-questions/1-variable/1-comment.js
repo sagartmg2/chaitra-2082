@@ -3,11 +3,14 @@
 console.log("unwanted buggy code")
 console.log("Hello World!")
 
+// practise js qn
+
 /* 
     COMMENTS
     ctr + /                line comment
     shift + alt + a        block comment
 */
+
 
 
 
