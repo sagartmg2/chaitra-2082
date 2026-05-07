@@ -36,12 +36,14 @@ M - modified files
 > git clone <github_url>
  eg git clone https://github.com/sagartmg2/chaitra-2082
  from next day > git pull
+//abinay
 
-
-
+// changes from my_branch and pushed to github
  git brach
  git checkout -b display-products
  
+ //creating pull request from my_branch
+ // pull request
  branch
  merge
  merge conflit
