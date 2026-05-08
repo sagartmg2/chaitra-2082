@@ -36,12 +36,18 @@ M - modified files
 > git clone <github_url>
  eg git clone https://github.com/sagartmg2/chaitra-2082
  from next day > git pull
-//abinay
 
-// changes from my_branch and pushed to github
- git brach
- git checkout -b display-products
- 
+ git branch  // show which branch you are in 
+ git branch -r
+ git fetch
+
+ git checkout staging   // switch between branches
+
+ git checkout -b <new-branch-name>    // create new branch
+ eg: git checkout -b login
+ git checkout -b payment
+ git checkout -b sagar-login
+
  branch
  merge
  merge conflit
