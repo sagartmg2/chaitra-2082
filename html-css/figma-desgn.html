@@ -53,7 +53,8 @@
         padding-bottom: 8px;
         font-family: "Josefin Sans", sans-serif;
         font-weight: 500;
-        font-weight: bold;
+        font-weight: 700;
+        font-weight: 900;
       }
 
       .top-nav svg {
@@ -62,6 +63,7 @@
       }
 
       .top-nav select {
+        background-color: rgba(255, 0, 0, 0);
         background-color: transparent;
         border: none;
         color: inherit;
@@ -139,7 +141,9 @@
           align-items: center;
           transform: translateX(0%);
           position: static;
+          background-color: rgba(255, 0, 0, 0);
           background-color: transparent;
+          /*  transperarent background */
         }
 
         .close {
@@ -209,7 +213,10 @@
 
           <div>
             <select>
+              <option>Urdu</option>
               <option>English</option>
+              <option>Hindi</option>
+              <option>Hindi</option>
               <option>Nepali</option>
               <option>hindi</option>
               <option>Urdu</option>
@@ -218,6 +225,7 @@
 
             </select>
             <select>
+              <option>Pound</option>
               <option>USD</option>
               <option>Nepali</option>
               <option>Pound</option>
@@ -235,9 +243,13 @@
         <div class="sidebar" id="sidebar">
           <div id="close-icon" class="close">X</div>
           <ul>
-            <li>Home</li>
-            <li>pages</li>
-            <li>products</li>
+            <li class="">signup</li>
+            <li class="">login</li>
+            <li class="">products</li>
+            <li class="">carts</li>
+            <li class="">orders</li>
+            <li class="">pages</li>
+            <li class="">Home</li>
           </ul>
 
           <div class="">
@@ -279,7 +291,6 @@
         </svg>
       </nav>
       <section>
-
         <h2 class="container">banner</h2>
         <h2 class="container">banner</h2>
         <h2 class="container">banner</h2>
@@ -310,6 +321,8 @@
         <p>products</p>
       </section>
     </header>
+    <p>login</p>
+    <p>login</p>
     <script>
       document
         .getElementById("menu-icon")
