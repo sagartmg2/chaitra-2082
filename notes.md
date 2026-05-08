@@ -39,7 +39,7 @@ M - modified files
 
 
 
- git brach
+ git branch
  git checkout -b display-products
  
  branch
