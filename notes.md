@@ -42,6 +42,7 @@ M - modified files
  git brach
  git checkout -b display-products
  
+ 
  branch
  merge
  merge conflit
