@@ -39,9 +39,10 @@ M - modified files
 
  git branch  // show which branch you are in 
  git branch -r
- git fetch
+ git fetch   // 
 
  git checkout staging   // switch between branches
+ git checkout 
 
  git checkout -b <new-branch-name>    // create new branch
  eg: git checkout -b login
