@@ -11,6 +11,10 @@ let color = {
  */
 let myLaptop ;
 
+myLaptop = {
+    name:"mac m4 air",
+    color: "#FFFF"
+}
 // CODE-HERE
 
 
