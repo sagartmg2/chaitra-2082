@@ -28,6 +28,5 @@ console.log("full name is", person.first_name, person.last_name+" and age is",pe
 console.log(`full name is ${person.first_name} ${person.last_name} and age is ${person.age} `)
 
 
-
 console.log(person.first_name);
 console.log(person.last_name);

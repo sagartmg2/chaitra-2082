@@ -10,6 +10,8 @@ let person = {
         - Change the value of country from India to Nepal
 */
 
+person.lastName = "Bahadur" 
+console.log(person);
 
 /* 
         CODE HERE .
