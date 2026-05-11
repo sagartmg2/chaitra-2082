@@ -6,8 +6,8 @@
 */
 
 let monitor = {
-    model: "smasung"
-    hertz: 120
+    "model": "smasung",
+    "hertz": 120
 }
 
 console.log(monitor);

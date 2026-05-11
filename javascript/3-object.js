@@ -81,6 +81,24 @@ let user2 = {
   },
 };
 
-let course = "mern";
-let course2 = "qa";
+// let course = "mern";
+let course = {
+  title: "mern",
+  durationInMonths: 3,
+  price: 10000,
+};
+
+console.log("prev", course.title);
+course.title = "mern-stack";
+console.log("after", course.title);
+console.log(course.durationInMonths);
+console.log(course.price);
+console.log(course);
+
+let course2 = {
+  title: "qa",
+  durationInMonths: 2.5,
+  price: 10000,
+};
+
 let course3 = "python";

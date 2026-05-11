@@ -11,6 +11,10 @@ let color = {
  */
 let myLaptop ;
 
+myLaptop ={
+    mode:"dell",
+    
+}
 // CODE-HERE
 
 
