@@ -16,6 +16,14 @@ myLaptop = {
     colour:"black"
 };
 
+<<<<<<< HEAD
+=======
+myLaptop ={
+    mode:"dell",
+    
+}
+// CODE-HERE
+>>>>>>> 27a18601a469e3d2c0a8c235d6d3ae9b089eeb48
 
 
 console.log(myLaptop)

@@ -1,13 +1,23 @@
+let data = {
+  name: "Ram",
+  password: "passwwrd",
+  email: "sagar@gmail.com",
+};
+
+
+
+fieldtoChange = "password";
+fieldtoChange = "email"
 
 
 let person = {
-    first_name: "john",
-    last_name: "doe",
-    age,
-    website: "https://www.johndoe.com"
-}
+  first_name: "john",
+  last_name: "doe",
+  age:12,
+  website: "https://www.johndoe.com",
+};
 
-let fieldToRetrive = "website"
+let fieldToRetrive = "website";
 
 /* 
 
@@ -18,8 +28,7 @@ let fieldToRetrive = "website"
 
 */
 
-console.log(peron.fieldToRetrive) //  what value does this print ??
-console.log(perons.website) // https://www.johndoe.com       // THIS IS NOT WHAT I AM EXPECTING YOU TO WRITE
+console.log(peron.fieldToRetrive); //  what value does this print ??
+console.log(perons.website); // https://www.johndoe.com       // THIS IS NOT WHAT I AM EXPECTING YOU TO WRITE
 
-
-console.log(peron.fieldToRetrive)  // TODO: CHANGE THIS LInE OF CODE           // EXPECTED-OUTPUT:  https://www.johndoe.com
+console.log(peron.fieldToRetrive); // TODO: CHANGE THIS LInE OF CODE           // EXPECTED-OUTPUT:  https://www.johndoe.com
