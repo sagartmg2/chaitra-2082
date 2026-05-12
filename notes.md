@@ -37,12 +37,25 @@ M - modified files
  eg git clone https://github.com/sagartmg2/chaitra-2082
  from next day > git pull
 
+ git branch  // show which branch you are in 
+ git branch -r
+ git fetch   // 
 
+ git checkout staging   // switch between branches
+ git checkout 
 
+ git checkout -b <new-branch-name>    // create new branch
+ eg: git checkout -b login
+ git checkout -b payment
+ git checkout -b sagar-login
+
+<<<<<<< HEAD
  git brach
  git checkout -b display-products
  
  
+=======
+>>>>>>> 884efe57d98fb28d18b3610d68cd5192f317b03c
  branch
  merge
  merge conflit
