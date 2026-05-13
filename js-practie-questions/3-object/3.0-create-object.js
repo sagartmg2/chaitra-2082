@@ -13,8 +13,9 @@ let myLaptop ;
 
 myLaptop ={
     mode:"dell",
-    
 }
+
+myLaptop.price = 10000
 // CODE-HERE
 
 

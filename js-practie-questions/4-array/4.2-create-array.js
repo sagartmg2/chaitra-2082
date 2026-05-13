@@ -1,5 +1,4 @@
-let colorNames = ["white", "red", "blue", "green", "black"]
-
+let colorNames = ["white", "red", "blue", "green", "black"];
 
 /* 
  we can create an array of colors like above  
@@ -9,7 +8,15 @@ let colorNames = ["white", "red", "blue", "green", "black"]
     is this the right way ?
 
     let colorNames = ["white","#FFFFFF","red",'FF0000', "blue",'0000FF']
+    
+    
+    */
 
-
-*/
-
+colorNames = ["white", "#FFFFFF", "red", "FF0000", "blue", "0000FF"];
+colorNames = [
+  {
+    name: "white",
+    hex: "#FFFF",
+  },
+  { name: "red", hex: "#FF0000" },
+];

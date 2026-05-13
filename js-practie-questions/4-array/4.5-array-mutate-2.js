@@ -24,6 +24,19 @@ let students = [
 ]
 
 
+
+
+console.log(students);
+console.log(students[1]);
+console.log(students[1].courses);
+console.log(students[1].courses[1]);
+
+students[1].courses[1] = "artifical intelligence"
+
+
+
+console.log(students);
+
 /* 
     TODO: 
      student with roll 2 have Mobile as one of his course 

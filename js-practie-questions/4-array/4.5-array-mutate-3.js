@@ -14,6 +14,8 @@ let students = [
 ]
 
 
+students[0].isActive = true
+students[1].isActive = false
 
 
 // CODE HERE
