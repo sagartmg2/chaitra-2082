@@ -316,16 +316,22 @@
     <p>login</p>
     <p>login</p>
     <script>
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("active");
+      }
+
       document
         .getElementById("menu-icon")
         .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.add("active");
+          toggleSidebar();
+          // document.getElementById("sidebar").classList.toggle("active");
         });
 
       document
         .getElementById("close-icon")
         .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.remove("active");
+          toggleSidebar();
+          // document.getElementById("sidebar").classList.toggle("active");
         });
     </script>
   </body>

@@ -3,10 +3,16 @@ let person = {
   age: 12,
 };
 
-console.log(person.address);
+console.log(person.address); // undefined
 person.address = "balaju";
 
 let courses = ["mern", "python", "qa"];
+
+courses = [
+  { title: "mern", topics: ["html", "css", "js"] },
+  { title: "python" },
+  { title: "qa" },
+];
 
 // TODO: what if we want to add two more courses here.  devops and  data-science here
 
