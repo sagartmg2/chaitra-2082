@@ -20,11 +20,18 @@ function double(inputNumber) {
     console.log( "2 + 20  = 22");
  */
 function sum(firstNumber, secondNumber) {
-  console.log({ firstNumber: firstNumber });
-  console.log({ secondNumber });
+  //   console.log({ firstNumber: firstNumber });
+  //   console.log({ secondNumber });
   let result = firstNumber + secondNumber;
-  console.log(`${firstNumber} + ${secondNumber}  = ${result}`);
+  //   console.log(`${firstNumber} + ${secondNumber}  = ${result}`);
+  return result;
 }
+
+console.log("result", sum(10, 20));
+
+double(sum(10, 20));
+// double(30);
+// console.log(30)
 
 // sum(10, 20);
 // sum(5, 15);
