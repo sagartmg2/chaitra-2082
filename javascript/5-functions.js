@@ -70,6 +70,8 @@ function sum(firstNumber, secondNumber) {
 
 sum(5, 10); // 5 + 10 = 15
 sum(33, 44); // 33 + 44 = 77
+sum(1, 44); // 1 + 44 = 45
+
 
 calculateMultiplicate(5, 2); // 5 X 2 = 10
 calculateMultiplicate(5, 3); // 5 X 3 = 15
