@@ -1,11 +1,16 @@
 let users = [];
 
+function addNewUser(name, age, address) {
+  users[0] = { name: name, age, address };
+}
+
 addNewUser("ram", 21, "kapan");
 addNewUser("shyam", 22, "bagbazar");
 addNewUser("hari", 22, "jamal");
 
+console.log(users);
 
-console.log(users)
+
 /* 
     EXPECTED-OUTPUT:
 

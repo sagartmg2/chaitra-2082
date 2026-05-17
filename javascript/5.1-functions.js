@@ -28,7 +28,8 @@ function sum(firstNumber, secondNumber) {
 }
 
 console.log("result", sum(10, 20));
-
+let result = sum(10,30)
+// let result = 40
 double(sum(10, 20));
 // double(30);
 // console.log(30)
