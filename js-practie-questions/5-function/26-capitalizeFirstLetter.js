@@ -6,9 +6,22 @@ capitalizeFirstLetter("hello") ➞ "Hello"
 capitalizeFirstLetter("world") ➞ "World"
 capitalizeFirstLetter("javascript") ➞ "Javascript"
 */
+/* 
+    hint: use string functions
+    - chartAt
+    - slice
+    - toUpperCase
 
-function capitalizeFirstLetter(str) {
-    // your code here
+
+    "hello"[0] = h
+
+
+*/
+
+function capitalizeFirstLetter(input) {
+  // your code here
+
+  return input;
 }
 
 console.log(capitalizeFirstLetter("hello"));

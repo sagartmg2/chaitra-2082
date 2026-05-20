@@ -1,15 +1,23 @@
 let users = [];
 
-function addNewUser(name, age, address) {
-  users[0] = { name: name, age, address };
+let incrementingIndex = 0;
+
+function addNewUserOld(name, age, address) {
+  users[incrementingIndex] = { name: name, age, address };
+  // incrementingIndex = incrementingIndex + 1;
+  // incrementingIndex += 1;
+  incrementingIndex++
 }
 
-addNewUser("ram", 21, "kapan");
-addNewUser("shyam", 22, "bagbazar");
-addNewUser("hari", 22, "jamal");
+function addNewUser(name, age, address) {
+  users[users.length] = { name: name, age, address };
+}
+
+addNewUser("ram", 21, "kapan"); // 0
+addNewUser("shyam", 22, "bagbazar"); // 1
+addNewUser("hari", 22, "jamal"); // 2
 
 console.log(users);
-
 
 /* 
     EXPECTED-OUTPUT:

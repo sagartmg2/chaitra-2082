@@ -29,17 +29,30 @@ output should be as follows
     name is rajesh hamal and age is 20.
     name is john wick and age is 30.
 */
+
+
+
+
 /* 
     console.log(`name is ${users[0].firstName} ${users[0].lastName} and age is ${users[0].age}.`)
     console.log(`name is ${users[1].firstName} ${users[1].lastName} and age is ${users[1].age}.`)
     console.log(`name is ${users[2].firstName} ${users[2].lastName} and age is ${users[2].age}.`)
  */
 
+
+
 function printUserInfoOld(idx) {
   console.log(
-    `name is ${users[idx]?.firstName} ${users[idx]?.lastName} and age is ${users[idx]?.age}.`,
+    `name is ${users[idx].firstName} ${users[idx]?.lastName} and age is ${users[idx]?.age}.`,
   );
 }
+// printUserInfo(0);
+// printUserInfo(1);
+// printUserInfo(2);
+// printUserInfo(3);
+// printUserInfo(4);
+
+
 
 function printUserInfo(user) {
   console.log(
@@ -47,16 +60,11 @@ function printUserInfo(user) {
   );
 }
 
-// printUserInfo(4);
-// printUserInfo(0);
-// printUserInfo(1);
-// printUserInfo(2);
-// printUserInfo(3);
 
+printUserInfo(users[4]); //  printUserInfo(undefined)
 printUserInfo({ firstName: "hari", lastName: "bahadur", age: 12 });
 printUserInfo(users[0]);
 printUserInfo(users[1]);
 printUserInfo(users[2]);
 printUserInfo(users[3]);
-printUserInfo(users[4]);
 printUserInfo(users[5]);
