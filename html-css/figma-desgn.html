@@ -1,332 +1,305 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-      rel="stylesheet"
-    />
 
-    <style>
-      /* css-reset */
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet" />
 
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        font-size: inherit;
-        font-weight: inherit;
-      }
-      ul,
-      ol {
-        list-style: none;
-      }
-      /* css-end */
+  <style>
+    /* css-reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-size: inherit;
+      font-weight: inherit;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    /* css-end */
+
+    .container {
+      max-width: 100%;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 0.75rem;
+      padding-left: 0.75rem;
+    }
+
+    .track {
+      border: 1px solid red;
+    }
+
+    .top-nav {
+      background-color: #7e33e0;
+      color: #f1f1f1;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      font-family: "Josefin Sans", sans-serif;
+      font-weight: 500;
+      font-weight: 700;
+      font-weight: 900;
+    }
+
+    .top-nav svg {
+      height: 16px;
+      width: 16px;
+    }
+
+    .top-nav select {
+      background-color: rgba(255, 0, 0, 0);
+      background-color: transparent;
+      border: none;
+      color: inherit;
+      font-weight: inherit;
+    }
+
+    .top-nav .container {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: start;
+      flex-wrap: wrap;
+    }
+
+    .top-nav .container>div {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .bottom-nav {
+      padding-top: 14px;
+      padding-bottom: 14px;
+      font-family: "Josefin Sans", sans-serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #0d0e43;
+      font-size: 34px;
+    }
+
+    .sidebar {
+      display: block;
+      background-color: #eeecff;
+      position: fixed;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      padding: 2rem;
+      transform: translateX(100%);
+    }
+
+    .sidebar.active {
+      transition: all 0.5s;
+      transform: translateX(0%);
+    }
+
+    @media (min-width: 640px) {
       .container {
-        max-width: 100%;
-        margin-right: auto;
-        margin-left: auto;
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
-      }
-
-      .track {
-        border: 1px solid red;
-      }
-
-      .top-nav {
-        background-color: #7e33e0;
-        color: #f1f1f1;
-        padding-top: 8px;
-        padding-bottom: 8px;
-        font-family: "Josefin Sans", sans-serif;
-        font-weight: 500;
-        font-weight: 700;
-        font-weight: 900;
-      }
-
-      .top-nav svg {
-        height: 16px;
-        width: 16px;
-      }
-
-      .top-nav select {
-        background-color: rgba(255, 0, 0, 0);
-        background-color: transparent;
-        border: none;
-        color: inherit;
-        font-weight: inherit;
+        max-width: 640px;
       }
 
       .top-nav .container {
-        display: flex;
-        gap: 0.5rem;
-        justify-content: start;
-        flex-wrap: wrap;
-      }
-      .top-nav .container > div {
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-      .bottom-nav {
-        padding-top: 14px;
-        padding-bottom: 14px;
-        font-family: "Josefin Sans", sans-serif;
-        display: flex;
         justify-content: space-between;
-        align-items: center;
       }
+    }
 
-      .logo {
-        color: #0d0e43;
-        font-size: 34px;
+    @media (min-width: 768px) {
+      .container {
+        max-width: 768px;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .container {
+        max-width: 1024px;
       }
 
       .sidebar {
-        display: block;
-        background-color: #eeecff;
-        position: fixed;
-        right: 0;
-        top: 0;
-        bottom: 0;
-        padding: 2rem;
-        transform: translateX(100%);
-      }
-
-      .sidebar.active {
-        transition: all 0.5s;
+        display: flex;
+        padding: 0px;
+        padding-left: 2rem;
+        flex-grow: 1;
+        justify-content: space-between;
+        align-items: center;
         transform: translateX(0%);
+        position: static;
+        background-color: rgba(255, 0, 0, 0);
+        background-color: transparent;
+        /*  transperarent background */
       }
 
-      @media (min-width: 640px) {
-        .container {
-          max-width: 640px;
-        }
-
-        .top-nav .container {
-          justify-content: space-between;
-        }
+      .close {
+        display: none;
       }
 
-      @media (min-width: 768px) {
-        .container {
-          max-width: 768px;
-        }
+      .menu-icon {
+        display: none;
       }
 
-      @media (min-width: 1024px) {
-        .container {
-          max-width: 1024px;
-        }
-
-        .sidebar {
-          display: flex;
-          padding: 0px;
-          padding-left: 2rem;
-          flex-grow: 1;
-          justify-content: space-between;
-          align-items: center;
-          transform: translateX(0%);
-          position: static;
-          background-color: rgba(255, 0, 0, 0);
-          background-color: transparent;
-          /*  transperarent background */
-        }
-
-        .close {
-          display: none;
-        }
-
-        .menu-icon {
-          display: none;
-        }
-
-        .sidebar ul {
-          display: flex;
-          gap: 1rem;
-        }
+      .sidebar ul {
+        display: flex;
+        gap: 1rem;
       }
-      @media (min-width: 1280px) {
-        .container {
-          max-width: 1280px;
-        }
+    }
+
+    @media (min-width: 1280px) {
+      .container {
+        max-width: 1280px;
       }
-      @media (min-width: 1536px) {
-        .container {
-          max-width: 1536px;
-        }
+    }
+
+    @media (min-width: 1536px) {
+      .container {
+        max-width: 1536px;
       }
-    </style>
-  </head>
-  <body>
-    <header>
-      <nav class="top-nav">
-        <div class="container track">
-          <div>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-mail-icon lucide-mail"
-            >
-              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-            </svg>
-            <span>mhhasanul@gmail.com</span>
+    }
+  </style>
+</head>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-mail-icon lucide-mail"
-            >
-              <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
-              <rect x="2" y="4" width="20" height="16" rx="2" />
-            </svg>
-            (12345)67890
-          </div>
+<body>
+  <header>
+    <nav class="top-nav">
+      <div class="container track">
+        <div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-mail-icon lucide-mail">
+            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+          </svg>
+          <span>mhhasanul@gmail.com</span>
 
-          <div>
-            <select>
-              <option>Urdu</option>
-              <option>English</option>
-              <option>Hindi</option>
-              <option>Hindi</option>
-              <option>Nepali</option>
-            </select>
-            <select>
-              <option>Pound</option>
-              <option>USD</option>
-              <option>Nepali</option>
-              <option>Dollar</option>
-            </select>
-            <span>login</span>
-          </div>
-        </div>
-      </nav>
-      <nav class="bottom-nav container track">
-        <div class="logo">Hekto</div>
-
-        <div class="sidebar" id="sidebar">
-          <div id="close-icon" class="close">X</div>
-          <ul>
-            <li class="">signup</li>
-            <li class="">login</li>
-            <li class="">products</li>
-            <li class="">carts</li>
-            <li class="">orders</li>
-            <li class="">pages</li>
-            <li class="">Home</li>
-          </ul>
-
-          <div class="">
-            <input />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              class="lucide lucide-search-icon lucide-search"
-            >
-              <path d="m21 21-4.34-4.34" />
-              <circle cx="11" cy="11" r="8" />
-            </svg>
-          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-mail-icon lucide-mail">
+            <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+            <rect x="2" y="4" width="20" height="16" rx="2" />
+          </svg>
+          (12345)67890
         </div>
 
-        <svg
-          id="menu-icon"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="menu-icon lucide lucide-menu-icon lucide-menu"
-        >
-          <path d="M4 5h16" />
-          <path d="M4 12h16" />
-          <path d="M4 19h16" />
-        </svg>
-      </nav>
-      <section>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-        <h2 class="container">banner</h2>
-      </section>
+        <div>
+          <select>
+            <option>Urdu</option>
+            <option>English</option>
+            <option>Hindi</option>
+            <option>Hindi</option>
+            <option>Nepali</option>
+          </select>
+          <select>
+            <option>Pound</option>
+            <option>USD</option>
+            <option>Nepali</option>
+            <option>Dollar</option>
+          </select>
+          <span>login</span>
+          <span>abhi</span>
+          <span>sachin tendulkar</span>
+        </div>
+      </div>
+    </nav>
+    <nav class="bottom-nav container track">
+      <div class="logo">Hekto</div>
 
-      <section>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-      </section>
-      <section>
-        <p>featured products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-        <p>products</p>
-      </section>
-    </header>
-    <p>login</p>
-    <p>login</p>
-    <script>
-      document
-        .getElementById("menu-icon")
-        .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.add("active");
-        });
+      <div class="sidebar" id="sidebar">
+        <div id="close-icon" class="close">X</div>
+        <ul>
+          <li class="">signup</li>
+          <li class="">login</li>
+          <li class="">products</li>
+          <li class="">carts</li>
+          <li class="">orders</li>
+          <li class="">pages</li>
+          <li class="">Home</li>
+        </ul>
 
-      document
-        .getElementById("close-icon")
-        .addEventListener("click", function () {
-          document.getElementById("sidebar").classList.remove("active");
-        });
-    </script>
-  </body>
+        <div class="">
+          <input />
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+            class="lucide lucide-search-icon lucide-search">
+            <path d="m21 21-4.34-4.34" />
+            <circle cx="11" cy="11" r="8" />
+          </svg>
+        </div>
+      </div>
+
+      <svg id="menu-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="menu-icon lucide lucide-menu-icon lucide-menu">
+        <path d="M4 5h16" />
+        <path d="M4 12h16" />
+        <path d="M4 19h16" />
+      </svg>
+    </nav>
+    <section>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+      <h2 class="container">banner</h2>
+    </section>
+
+    <section>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+    </section>
+    <section>
+      <p>featured products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+      <p>products</p>
+    </section>
+  </header>
+  <p>login</p>
+  <p>login</p>
+  <script>
+    document
+      .getElementById("menu-icon")
+      .addEventListener("click", function () {
+        document.getElementById("sidebar").classList.add("active");
+      });
+
+    document
+      .getElementById("close-icon")
+      .addEventListener("click", function () {
+        document.getElementById("sidebar").classList.remove("active");
+      });
+  </script>
+</body>
+
 </html>
