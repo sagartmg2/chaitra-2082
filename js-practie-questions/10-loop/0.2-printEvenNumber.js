@@ -14,3 +14,9 @@
     54
     
 */
+
+for (let number = 23; number <= 55; number++) {
+  if(number % 2 == 0){
+    console.log(number);
+  }
+}
