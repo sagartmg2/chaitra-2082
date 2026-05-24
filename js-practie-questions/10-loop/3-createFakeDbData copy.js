@@ -1,46 +1,50 @@
-const nepaliNames = ["Aarav", "Aarya", "Aasha", "Anisha"];
+const nepaliNames = ["Aarav", "Aarya", "Aasha", "Anisha", "John"];
 
 let users = [];
 
-// for (let i = 0; i < nepaliNames.length; i++) {
-//   let name = nepaliNames[i];
-//   users.push({
-//     name: name,
-//     email: `${name.toLowerCase()}@gmail.com`,
-//     pasword: `${name.toLowerCase()}${i}`,
-//   });
-// }
+/* 
+  users[0] = {
+    name: nepaliNames[0],
+    email: nepaliNames[0] + "gmail.com",
+    password: nepaliNames[0] + "0",
+  };
+  users[1] = {
+    name: nepaliNames[1],
+    email: nepaliNames[1] + "gmail.com",
+    password: nepaliNames[1] + "0",
+  };
+ */
 
-function printName(name) {
-  console.log(`passed name is ${name}`);
+/* users.push({
+    name: nepaliNames[0],
+    email: nepaliNames[0] + "gmail.com",
+    password: nepaliNames[0] + "0",
+  });
+
+  users.push({
+    name: nepaliNames[1],
+    email: nepaliNames[1] + "gmail.com",
+    password: nepaliNames[1] + "0",
+  });
+*/
+
+
+
+
+for (let index = 0; index < nepaliNames.length; index++) {
+  // users[index] = {
+  //   name: nepaliNames[index],
+  //   email: nepaliNames[index] + "gmail.com",
+  //   password: nepaliNames[index] + "0",
+  // };
+
+  users.push({
+    name: nepaliNames[index],
+    email: nepaliNames[index] + "gmail.com",
+    password: nepaliNames[index] + "0",
+  });
 }
 
-// printName(nepaliNames[0]);
-// printName(nepaliNames[1]);
-// printName("hari");
-
-nepaliNames.forEach((el, index) => {
-  users.push({
-    name: el,
-    email: `${el.toLowerCase()}@gmail.com`,
-    pasword: `${el.toLowerCase()}${index}`,
-  });
-});
-
-let fakeUsers = nepaliNames.map((el, index) => {
-  return {
-    name: el,
-    email: `${el.toLowerCase()}@gmail.com`,
-    pasword: `${el.toLowerCase()}${index}`,
-  };
-});
-
-console.log({fakeUsers});
-
-/* 
-  map function
-
-*/
 /* 
 TODO: 
     From the above array create an new array of users with email and password 

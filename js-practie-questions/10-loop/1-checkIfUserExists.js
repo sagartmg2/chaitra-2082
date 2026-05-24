@@ -1,4 +1,4 @@
-let db_users = [
+let dbUsers = [
   { name: "Aarav", email: "aarav@gmail.com", password: "aarav0" },
   { name: "Aarya", email: "aarya@gmail.com", password: "aarya1" },
   { name: "Aasha", email: "aasha@gmail.com", password: "aasha2" },
@@ -67,6 +67,7 @@ let db_users = [
   { name: "Urmila", email: "urmila@gmail.com", password: "urmila37" },
   { name: "Yogesh", email: "yogesh@gmail.com", password: "yogesh38" },
 ];
+
 
 /* 
 TODO:
