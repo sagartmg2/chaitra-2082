@@ -21,26 +21,3 @@ let user_2 = {
     checkAdminAccess(user_2) // ram can not create-delete the users
 
 */
-
-
-/* 
-    EXPECTED-OUTPUT on console.log(users)
-    [
-        {
-            name:"Ram",
-            percentage:98,
-            grade:A
-        },
-        {
-            name:"john",
-            percentage:65,
-            grade:D
-        },
-        {
-            name:"sita",
-            percentage:80,
-            grade:B
-        },
-    ]
-    
-*/
