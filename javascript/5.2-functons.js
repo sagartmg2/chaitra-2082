@@ -12,8 +12,12 @@ let person2 = {
 
 /* console.log(person2.firstName + " " + person2.lastName); */
 
-function getFullName(user) {
-  console.log(user.firstName + " " + user.lastName);
+// function getFullName(user) {
+//   console.log(user.firstName + " " + user.lastName);
+// }
+
+const getFullName = (user) =>{
+   console.log(user.firstName + " " + user.lastName);
 }
 
 getFullName(person1);
