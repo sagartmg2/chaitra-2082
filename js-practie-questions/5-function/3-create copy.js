@@ -1,12 +1,14 @@
-let users = [];
+
 
 /* 
     users[0] = { name: "ram", age: 21, address: "kapan" };
     users[1] = { name: "shyam", age: 22, address: "bagbazar" };
     users[2] = { name: "hari", age: 22, address: "bagbazar" };
  */
+
+let users = [];
 function addNewUser(id, name, age, address) {
-  users[id] = { name: name, age, address };
+  users[id] = { name: name, age:age, address:address };
 }
 
 addNewUser(0, "ram", 21, "kapan");

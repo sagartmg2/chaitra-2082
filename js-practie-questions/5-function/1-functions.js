@@ -21,6 +21,15 @@ let users = [
   },
 ];
 
+function printUserDetails(indx){
+  console.log(`name is ${users[indx]?.firstName} ${users[indx]?.lastName} and age is ${users[indx]?.age}`);
+}
+printUserDetails(0);
+printUserDetails(1);
+printUserDetails(2);
+printUserDetails(3);
+
+
 /* 
 TODO: create a function printUserDetails and re-use it for all users 
 
@@ -35,17 +44,17 @@ output should be as follows
     console.log(`name is ${users[2].firstName} ${users[2].lastName} and age is ${users[2].age}.`)
  */
 
-function printUserInfoOld(idx) {
-  console.log(
-    `name is ${users[idx]?.firstName} ${users[idx]?.lastName} and age is ${users[idx]?.age}.`,
-  );
-}
+// function printUserInfoOld(idx) {
+//   console.log(
+//     `name is ${users[idx]?.firstName} ${users[idx]?.lastName} and age is ${users[idx]?.age}.`,
+//   );
+// }
 
-function printUserInfo(user) {
-  console.log(
-    `name is ${user?.firstName} ${user?.lastName} and age is ${user?.age}.`,
-  );
-}
+// function printUserInfo(user) {
+//   console.log(
+//     `name is ${user?.firstName} ${user?.lastName} and age is ${user?.age}.`,
+//   );
+// }
 
 // printUserInfo(4);
 // printUserInfo(0);
@@ -53,10 +62,10 @@ function printUserInfo(user) {
 // printUserInfo(2);
 // printUserInfo(3);
 
-printUserInfo({ firstName: "hari", lastName: "bahadur", age: 12 });
-printUserInfo(users[0]);
-printUserInfo(users[1]);
-printUserInfo(users[2]);
-printUserInfo(users[3]);
-printUserInfo(users[4]);
-printUserInfo(users[5]);
+// printUserInfo({ firstName: "hari", lastName: "bahadur", age: 12 });
+// printUserInfo(users[0]);
+// printUserInfo(users[1]);
+// printUserInfo(users[2]);
+// printUserInfo(users[3]);
+// printUserInfo(users[4]);
+// printUserInfo(users[5]);

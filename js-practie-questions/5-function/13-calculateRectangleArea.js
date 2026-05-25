@@ -8,3 +8,11 @@ calculateArea(5, 3) ➞ 15
 calculateArea(10, 4) ➞ 40
 calculateArea(7, 7) ➞ 49
 */
+
+function calculateArea(length,width){
+    let area = length * width
+return `Area of rectangle is ${area}`;
+}
+console.log(calculateArea(5,3))
+console.log(calculateArea(10,4))
+console.log(calculateArea(7,7))

@@ -1,6 +1,5 @@
 let courses = ["mern", "python", "qa"];
 let users = ["ram", "hari", "sita"];
-
 function getFirstElement(inputArray) {
   let firstElement = inputArray[0];
   return firstElement
@@ -10,6 +9,8 @@ function getFirstElement(inputArray) {
 console.log(getFirstElement(courses));
 console.log(getFirstElement(users));
 
+
+
 /* TODO: Create a function that takes an array and returns the first element. 
     example.
 
@@ -17,3 +18,5 @@ console.log(getFirstElement(users));
     getFirstElement(users) // EXPECTED-OUTPUT : ram
 
 */
+
+

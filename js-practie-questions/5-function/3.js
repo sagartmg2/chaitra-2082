@@ -22,6 +22,17 @@ let students = [
   }
 ];
 
+function getInfo(indx){
+  let firstTerm = students[indx].scores[0];
+  let secondTerm = students[indx].scores[1];
+
+  console.log(`${students[indx]?.name.toLowerCase()} scored gpa ${firstTerm.gpa} in ${firstTerm.exam} and ${secondTerm.gpa} in ${secondTerm.exam}`) 
+}
+getInfo(0);
+getInfo(1);
+getInfo(2);
+
+
 
 /*  
     using functon, achieve the following

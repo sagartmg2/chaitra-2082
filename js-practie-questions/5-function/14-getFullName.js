@@ -8,6 +8,13 @@ let person2 = {
   lastName: "Gurung"
 };
 
+function getFullName(person){
+return `${person.firstName} ${person.lastName}`;
+}
+console.log(getFullName(person1));
+console.log(getFullName(person2));
+
+
 /*
 TODO: Create a function called getFullName that takes a person object and returns their full name.
 

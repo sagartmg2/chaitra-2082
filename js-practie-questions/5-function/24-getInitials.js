@@ -8,6 +8,8 @@ getInitials({ firstName: "Sita", lastName: "Gurung" }) ➞ "SG"
 
 function getInitials(person) {
     // your code here
+    return `"${person.firstName[0].toUpperCase()}${person.lastName[0].toUpperCase()}"`
 }
 
 console.log(getInitials({ firstName: "Ram", lastName: "Shrestha" }));
+console.log(getInitials({ firstName: "Sita", lastName: "Gurung" }));

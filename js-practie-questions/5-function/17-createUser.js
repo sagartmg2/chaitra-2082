@@ -5,3 +5,10 @@ Example:
 createUser("Ram", 25, "ram@email.com") ➞ { name: "Ram", age: 25, email: "ram@email.com" }
 createUser("Sita", 22, "sita@email.com") ➞ { name: "Sita", age: 22, email: "sita@email.com" }
 */
+
+
+function createUser(name,age,email){
+    return `name: ${name}, age:${age}, email:${email}`
+}
+console.log(createUser("Ram", 25, "ram@email.com"))
+console.log(createUser("Sita", 22, "sita@email.com"))

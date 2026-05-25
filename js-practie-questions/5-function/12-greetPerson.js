@@ -6,3 +6,10 @@ greet("Ram") ➞ "Hello Ram!"
 greet("Sita") ➞ "Hello Sita!"
 greet("Hari") ➞ "Hello Hari!"
 */
+
+function greet(personName){
+   return `Hello ${personName}!`;
+}
+    console.log(greet("Ram"));
+    console.log(greet("Sita"));
+    console.log(greet("Hari"));

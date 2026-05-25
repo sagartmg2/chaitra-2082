@@ -9,6 +9,11 @@ capitalizeFirstLetter("javascript") ➞ "Javascript"
 
 function capitalizeFirstLetter(str) {
     // your code here
+    let firstInitial = str[0].toUpperCase();
+    let restLeftWords = str.slice(1);
+    return `${firstInitial}${restLeftWords}`;
 }
 
 console.log(capitalizeFirstLetter("hello"));
+console.log(capitalizeFirstLetter("world"));
+console.log(capitalizeFirstLetter("javascript"));

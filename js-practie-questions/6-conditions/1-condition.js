@@ -11,3 +11,4 @@ let isSeller = true;
         output:
         no, he cannot add new products
 */
+function 
