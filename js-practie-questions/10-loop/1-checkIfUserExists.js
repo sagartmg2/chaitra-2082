@@ -68,7 +68,6 @@ let dbUsers = [
   { name: "Yogesh", email: "yogesh@gmail.com", password: "yogesh38" },
 ];
 
-
 /* 
 TODO:
     create a function to check the email and password for a user 
@@ -82,3 +81,73 @@ OUTPUT:
     // loginUser("urmila@gmail.com","urmila-wrong") // Invalid Credential
 
 */
+
+// function loginUser(email, password) {
+
+// iterate || go through each and every element of an array
+// check if the email exits
+// if email extis, check password as well
+// if not matched any  Invalid Credential
+
+const loginUserOld = (email, password) => {
+  let matched = false;
+
+  for (let index = 0; index < dbUsers.length; index++) {
+    let user = dbUsers[index];
+    if (user.email === email && user.password == password) {
+      // console.log("login success");
+      // return;
+      matched = true;
+      break;
+    }
+  }
+
+  if (matched) {
+    console.log("login succes");
+  } else {
+    console.log("invalid credntatils");
+  }
+};
+
+const loginUser = (email, password) => {
+  let matched = false;
+  dbUsers.forEach((user, index) => {
+    if (user.email === email && user.password == password) {
+      console.log("login successful");
+      matched = true;
+      // break;
+      return;
+      console.log("second login successful");
+    } else {
+      console.log("check for anotheruser", index);
+    }
+  });
+
+  if (matched) {
+    console.log("login succes");
+  } else {
+    console.log("invalid credntatils");
+  }
+};
+
+loginUser("urmila@gmail.com", "urmila37");
+
+let numbers = [10, 20, 30, 40];
+
+// for (let i = 0; i < numbers.length; i++) {
+//   console.log(numbers[i]);
+// }
+
+// function printElement(el, idx) {
+//   console.log("print element", el, idx);
+// }
+
+// const printElement = (el, idx) => {
+//   console.log("print element", el, idx);
+// };
+
+// numbers.forEach(printElement);
+
+// numbers.forEach((num, idx) => {
+//   console.log("print element", num, idx);
+// });

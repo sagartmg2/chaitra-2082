@@ -1,7 +1,31 @@
-const nepaliNames = ["Aarav", "Aarya", "Aasha", "Anisha"]
+const nepaliNames = ["Aarav", "Aarya", "Aasha", "Anisha"];
+
+let users = [];
+
+for (let index = 0; index < nepaliNames.length; index++) {
+  users[index] = {
+    name: nepaliNames[index],
+    email: nepaliNames[index] + "gmail.com",
+    password: nepaliNames[index] + index,
+  };
+
+  //   users.push({
+  //     name: nepaliNames[index],
+  //     email: nepaliNames[index] + "gmail.com",
+  //     password: nepaliNames[index] + index,
+  //   });
+}
+
+nepaliNames.forEach((name, index) => {
+  users.push({
+    name,
+    email: name + "gmail.com",
+    password: name + index,
+  });
+});
 
 
-
+console.log(users);
 /* 
 
 TODO: 
