@@ -1,14 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Caluclator app</h1>
     <pre>
         Hint
@@ -26,38 +25,35 @@
             - &lt;element&gt;.innerHTML
     </pre>
 
-
     <div>
-        <p>
-            result : <span></span>
-        </p>
-        <form onsubmit="calculate(event)">
-
-            <input type="number" id="first">
-            <select>
-                <option value="+">+</option>
-                <option value="-">-</option>
-                <option value="*">x</option>
-            </select>
-            <input type="number" id="second">
-            <input type="submit" value="calucate">
-        </form>
-
-
+      <p>result : <span id="result"> </span></p>
+      <form onsubmit="calculate(event)">
+        <input type="number" id="first" />
+        <select id="operator">
+          <option value="+">+</option>
+          <option value="-">-</option>
+          <option value="*">x</option>
+        </select>
+        <input type="number" id="second" />
+        <input type="submit" value="calucate" />
+      </form>
     </div>
 
-
-
-
     <script>
+      function calculate(e) {
+        e.preventDefault(); // stop page refersh
+        console.log("here");
 
-        function calculate(e) {
-            e.preventDefault();
-            console.log("here");
-        }
+        let firstInput = document.getElementById("first").value;
+        let secondInput = document.getElementById("second").value;
+        let operator = document.getElementById("operator").value;
 
+        let result = 400;
+        // condition
+
+        // document.getElementById("result").innerHTML = result
+        document.getElementById("result").innerText = result;
+      }
     </script>
-
-</body>
-
+  </body>
 </html>

@@ -1,7 +1,7 @@
 let people = [
-    { name: "Ram", age: 25 },
-    { name: "Sita", age: 22 },
-    { name: "Hari", age: 30 }
+  { name: "Ram", age: 25 },
+  { name: "Sita", age: 22 },
+  { name: "Hari", age: 30 },
 ];
 
 /*
@@ -12,8 +12,13 @@ findPersonByName(people, "Sita") ➞ { name: "Sita", age: 22 }
 findPersonByName(people, "Hari") ➞ { name: "Hari", age: 30 }
 */
 
-function findPersonByName(peopleArray, name) {
-    // your code here
+function findPersonByName(inputArr, name) {
+  let matched = inputArr.find((el) => {
+    if (el.name == name) {
+      return true;
+    }
+  });
+  return matched;
 }
 
 console.log(findPersonByName(people, "Sita"));
