@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "dev":"node index.js"
+  },
   "type": "module",
   "dependencies": {
     "bcrypt": "^6.0.0"

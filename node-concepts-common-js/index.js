@@ -10,8 +10,8 @@
         - __dirname
 */
 
-// console.log(__filename);
-// console.log(__dirname);
+console.log(__filename);
+console.log(__dirname);
 
 /* 
     modules
@@ -19,41 +19,41 @@
             - fs
             - path
             - http  
+            - https  
         - local modules
             
         - third party module
             - bcrypt
+                > npm i bcrypt
             - jwt
             - express
 
 
 */
 
-// const fs = require("fs"); // { writesFilesycn: (name,contnet) =>{}}
-import fs from "fs";
-
+const fs = require("fs"); // { writesFilesycn: (name,contnet) =>{}}
 fs.writeFileSync("2026-05-28.log", "info: user logged in");
 
-import path from "path";
-// const newPath = path.join(__dirname, "/uploads");
-// console.log(newPath);
+const path = require("path");
+
+const newPath = path.join(__dirname, "/uploads");
+console.log(newPath);
 console.log(path.extname("user-upload.pdf"));
 
-// import signup from "./auth.js";
-// signup("user@gmail.com", "password");
-
-
-
-
-import register,{ login, ADMIN } from "./auth.js";
-register("user@gmail.com", "password");
-login("user@gmail.com", "password");
-
-// common js pattern
 // const auth = require("./auth")  // { }
 // auth.signup("user@gmail.com", "password");
 // auth.login("user@gmail.com", "password");
 
-// const { signup, login } = require("./auth"); // { }
+const signup = require("./auth");
+signup("user@gmail.com", "password");
+
+/* named imports */
+/* way 1 */
+// const {signup,login} = require("./auth")  // { }
 // signup("user@gmail.com", "password");
 // login("user@gmail.com", "password");
+
+/* way 2 */
+// const auth = require("./auth")  // { }
+// auth.signup("user@gmail.com", "password");
+// auth.login("user@gmail.com", "password");
