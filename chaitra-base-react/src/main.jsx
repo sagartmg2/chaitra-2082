@@ -1,4 +1,7 @@
 import { createRoot } from "react-dom/client";
+import "./index.css";
+import {todos} from "./data/todos"
+
 // import {courses} from "./data/courses"
 
 let description =
@@ -45,46 +48,88 @@ let courses = [
   },
 ];
 
+let mappedCourses = courses.map((el) => {
+  return (
+    <li className="course">
+      <img height="100" src={domain + el.image} />
+      <p>{el.title}</p>
+      <p>feature: {el.featured ? "yes" : "no"}</p>
+    </li>
+  );
+});
+
+// [<li>courses....</li>, <li>course dteail...</li>];
 
 createRoot(document.getElementById("root")).render(
   <div>
-    <h1>FEATURED</h1>
-
-    <br />
-    <h1>Courses</h1>
-    <p>{description}</p>
-    <ul>
-      <li>
-        <img height="100" src="https://mindrisers.com.np/static/Images/courses/banner/python-banner-min_7hCoIdR.jpg" />
-        <p>MERRRRNNNN</p>
-        <p>feature: yes</p>
-      </li>
-
-      <li>
+    {/* <h1 style="color:red;" >Featured</h1> */}
+    <h1 style={{ textTransform: "uppercase", textDecoration: "underline" }}>
+      Featured
+    </h1>
+    <ul className="courses">
+      <li className="course">
         <img height="100" src={domain + courses[0].image} />
         <p>{courses[0].title}</p>
         <p>feature: {courses[0].featured ? "yes" : "no"}</p>
       </li>
-
-      <li>
-        <img height="100" src={domain + courses[1].image} />
-        <p>{courses[1].title}</p>
-        <p>feature: {courses[1].featured ? "yes" : "no"}</p>
+      <li className="course">
+        <img height="100" src={domain + courses[0].image} />
+        <p>{courses[0].title}</p>
+        <p>feature: {courses[0].featured ? "yes" : "no"}</p>
       </li>
-
-      <li>
-        <img height="100" src={`${domain}${courses[2].image}`} />
-        <p>{courses[2].title}</p>
-        <p>feature: {courses[2].featured ? "yes" : "no"}</p>
-      </li>
-
-      <li>
-        <img height="100" src={`${domain}${courses[3].image}`} />
-        <p>{courses[3].title}</p>
-        <p>feature: {courses[3].featured ? "yes" : "no"}</p>
+      <li className="course">
+        <img height="100" src={domain + courses[0].image} />
+        <p>{courses[0].title}</p>
+        <p>feature: {courses[0].featured ? "yes" : "no"}</p>
       </li>
     </ul>
 
-    <h2></h2>
+    <br />
+    <h1>Courses</h1>
+    <p>{description}</p>
+
+    <ul className="courses">
+      {/* {mappedCourses} */}
+
+      {courses.map((el) => {
+        return (
+          <li className="course">
+            <img height="100" src={domain + el.image} />
+            <p>{el.title}</p>
+            <p>feature: {el.featured ? "yes" : "no"}</p>
+            <p>Rs: 10000</p>
+          </li>
+        );
+      })}
+
+      {/* <li className="course">
+        <img
+          height="100"
+          src="https://mindrisers.com.np/static/Images/courses/banner/python-banner-min_7hCoIdR.jpg"
+        />
+        <p>MERRRRNNNN</p>
+        <p>feature: yes</p>
+      </li>
+
+      <li className="course">
+        <img height="100" src={domain + courses[0].image} />
+        <p>{courses[0].title}</p>
+        <p>feature: {courses[0].featured ? "yes" : "no"}</p>
+      </li>
+      */}
+    </ul>
+    <br />
+    <br />
+    <br />
+    <h1> TODOS list</h1>
+    {/* FIXME : covert this to tabular form:  */}
+    <ul>
+      <li>one</li>
+      <li>one</li>
+      <li>one</li>
+      <li>one</li>
+      <li>one</li>
+      <li>one</li>
+    </ul>
   </div>,
 );
