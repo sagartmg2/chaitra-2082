@@ -10,7 +10,7 @@ export let courses = [
     image: "/static/Images/courses/banner/python-banner-min_7hCoIdR.jpg",
   },
   {
-    featured:true,
+    featured:false,
     title: "Digital Marketing Training in Nepal",
     image:
       "/static/Images/courses/banner/DIGITAL-MARKETING-banner-min_JBHENk4.webp",
@@ -36,6 +36,17 @@ export let courses = [
     image: "/static/Images/courses/banner/DevOps_Training.png",
   },
 ];
+
+
+let featuredCourses = courses.filter((el) => {
+  if (el.featured) {
+    return true;
+  }
+});
+
+//  featuredCourses = courses.filter((el) => false);
+ featuredCourses = courses.filter((el) => el.featured);
+console.log(featuredCourses);
 
 
 // export courses;
