@@ -19,3 +19,26 @@ th {
   padding: 0.5rem;
   border: 1px solid;
 }
+
+.btn {
+  color: white;
+  background-color: rgb(111, 111, 124);
+  border: 0;
+  padding: 0.5rem 1rem;
+}
+
+.btn-sm {
+  padding: 0.2rem 0.8rem;
+}
+
+
+.todos .status{
+  color:white;
+  display: inline-block;
+  background-color: green;
+  padding: .05rem .8rem;
+}
+
+.status.pending{
+  background-color: red;
+}
