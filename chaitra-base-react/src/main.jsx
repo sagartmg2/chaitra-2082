@@ -12,7 +12,7 @@ import App from "./App";
 // props = {title:"",description:"",description}
 
 createRoot(document.getElementById("root")).render(
-  <div>
+  <div className="main">
       <App/>
   </div>,
 );

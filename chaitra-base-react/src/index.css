@@ -21,6 +21,7 @@ th {
 }
 
 .btn {
+  margin-left: 0.5rem;
   color: white;
   background-color: rgb(111, 111, 124);
   border: 0;
@@ -31,14 +32,21 @@ th {
   padding: 0.2rem 0.8rem;
 }
 
-
-.todos .status{
-  color:white;
-  display: inline-block;
-  background-color: green;
-  padding: .05rem .8rem;
+.btn-lg {
+  padding: 1rem 1.5rem;
 }
 
-.status.pending{
+.btn.rounded {
+  border-radius: 16px;
+}
+
+.todos .status {
+  color: white;
+  display: inline-block;
+  background-color: green;
+  padding: 0.05rem 0.8rem;
+}
+
+.status.pending {
   background-color: red;
 }

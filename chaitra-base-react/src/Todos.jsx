@@ -1,3 +1,4 @@
+import Button, { SmallButton, BigButton } from "./components/ui/Button";
 import { todos } from "./data/todos";
 
 const Todos = () => {
@@ -52,7 +53,13 @@ const Todos = () => {
         {todos.map((el) => {
           return (
             <li key={el.id}>
-              {el.todo} ( {el.completed ? "yes" : "no"} ){" "}
+              {el.todo} ( {el.completed ? "yes" : "no"} )
+              &nbsp;
+              <Button size="sm" label="edit"/>
+              <Button label="delete" rounded/>
+              <Button size="lg" label="edit" rounded/>
+              {/* <SmallButton/> */}
+              {/* <BigButton/> */}
             </li>
           );
         })}

@@ -1,3 +1,5 @@
+import Button from "./components/ui/Button";
+
 let domain = "https://mindrisers.com.np";
 
 export default function Course(props) {
@@ -8,7 +10,8 @@ export default function Course(props) {
       <p>{props.description}</p>
       <p>feature: {props.featured ? "yes" : "no"}</p>
       <p>Rs:10000</p>
-      <button className="btn">view more</button>
+      {/* <button className="btn">view more</button> */}
+      <Button/>
     </li>
   );
 }
