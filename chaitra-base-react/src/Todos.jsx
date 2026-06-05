@@ -2,6 +2,9 @@ import Button, { SmallButton, BigButton } from "./components/ui/Button";
 import { todos } from "./data/todos";
 
 const Todos = () => {
+  
+  
+  console.log("render todos");
   return (
     <>
       <h1> TODOS list</h1>

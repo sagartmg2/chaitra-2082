@@ -1,4 +1,25 @@
+// props  = {size:"xl" ,rounded:"true" ,label:"view more"}
+
 export default function Button(props) {
+  let { label, size, rounded } = props; // object desructuring
+
+  let className = "btn ";
+
+  if (size == "sm") {
+    className += "btn-sm";
+  } else if (size == "lg") {
+    className += "btn-lg";
+  }
+
+  if (rounded) {
+    className += " rounded";
+  }
+
+  //   return <button disabled={props.disabled} className={`btn ${props.rounded ? "rounded":""}  ${props.size == "sm" ? "btn-sm" : props.size =="lg" ? "btn-lg":""}`}>{props.label}</button>;
+  return <button className={className}>{label}</button>;
+}
+
+export function ButtonOld(props) {
   let className = "btn ";
 
   if (props.size == "sm") {
@@ -7,15 +28,13 @@ export default function Button(props) {
     className += "btn-lg";
   }
 
-  if(props.rounded){
+  if (props.rounded) {
     className += " rounded";
   }
 
-
-//   return <button disabled={props.disabled} className={`btn ${props.rounded ? "rounded":""}  ${props.size == "sm" ? "btn-sm" : props.size =="lg" ? "btn-lg":""}`}>{props.label}</button>;
+  //   return <button disabled={props.disabled} className={`btn ${props.rounded ? "rounded":""}  ${props.size == "sm" ? "btn-sm" : props.size =="lg" ? "btn-lg":""}`}>{props.label}</button>;
   return <button className={className}>{props.label}</button>;
 }
-
 
 export function SmallButton() {
   return <button className="btn btn-sm">view more</button>;
