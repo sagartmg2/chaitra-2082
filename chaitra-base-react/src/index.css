@@ -50,3 +50,9 @@ th {
 .status.pending {
   background-color: red;
 }
+
+.dark-mode {
+  background: black;
+  color: white;
+  min-height: 100vh;
+}

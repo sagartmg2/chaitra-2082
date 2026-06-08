@@ -20,6 +20,7 @@ import CounterHistory from "./CounterHistory";
 
 export default function Counter() {
   let initalValue = 100;
+  
   const [countValue, setCountValue] = useState(initalValue);  // array destructuring
 
   const increment = () => {

@@ -27,6 +27,10 @@
 
     <div>
       <p>result : <span id="result"> </span></p>
+
+      <button onclick="calculateResult()">calculate result</button>
+      <button id="calc-result">calculate result</button>
+
       <form onsubmit="calculate(event)">
         <input type="number" id="first" />
         <select id="operator">
@@ -40,6 +44,14 @@
     </div>
 
     <script>
+      document
+        .getElementById("calc-result")
+        .addEventListener("click", calculateResult);
+
+      function calculateResult() {
+        console.log("calculate result");
+      }
+
       function calculate(e) {
         e.preventDefault(); // stop page refersh
         console.log("here");
