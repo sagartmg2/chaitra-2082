@@ -8,7 +8,7 @@ function ChangeTheme() {
   const changeToDarkTheme = () => {
     // darkTheme = true;
     setDarkTheme(true);
-    console.log("changeToDarkTheme");
+    console.log("changeToDarkTheme",darkTheme);
   };
 
   const changeToLightTheme = () => {
@@ -16,11 +16,32 @@ function ChangeTheme() {
     setDarkTheme(false);
     console.log("changeToLightTheme");
   };
+  
 
+  // re-render
   return (
     <div className={darkTheme ? "dark-mode" : ""}>
-      <button onClick={changeToDarkTheme}>dark theme</button>
-      <button onClick={changeToLightTheme}>light theme</button>
+      
+       {/* <button
+        style={{ display: darkTheme ? "none" : "" }}
+        onClick={changeToDarkTheme}
+      >
+        dark theme
+      </button>
+      <button
+        style={{ display: !darkTheme ? "none" : "" }}
+        onClick={changeToLightTheme}
+      >
+        light theme
+      </button>  */}
+
+     
+
+      {darkTheme ? (
+        <button onClick={changeToLightTheme}>light theme</button>
+      ) : (
+        <button onClick={changeToDarkTheme}>dark theme</button>
+      )}
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus

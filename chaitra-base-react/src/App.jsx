@@ -3,17 +3,20 @@ import Courses from "./Courses";
 import Counter from "./Counter";
 import ChangeTheme from "./ChangeTheme";
 import GoogleTabs from "./GoogleTabs";
+import Header from "./components/layout/Header";
+import TodosCrud from "./TodosCrud";
 
 export default function App() {
   return (
-    <>
-      {/* <header>header</header> */}
+    <div className="">
+      {/* <Header /> */}
       {/* <Courses /> */}
       {/* <Todos />
       <Counter /> */}
-      {/* <ChangeTheme/> */}
-      <GoogleTabs/>
+      {/* <ChangeTheme /> */}
+      {/* <GoogleTabs /> */}
       {/* <footer>footer</footer> */}
-    </>
+      <TodosCrud/>
+    </div>
   );
 }

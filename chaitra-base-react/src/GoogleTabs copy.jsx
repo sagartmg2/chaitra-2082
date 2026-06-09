@@ -5,6 +5,10 @@ function GoogleTabs() {
 
   const [currentTab, setCurrentTab] = useState("all");
 
+  const changeTabToAll = () => {
+    setCurrentTab("all");
+  };
+
   const changeTabToImages = () => {
     setCurrentTab("images");
   };
@@ -13,7 +17,6 @@ function GoogleTabs() {
     setCurrentTab("videos");
   };
 
-  console.log("render | re-render");
   return (
     <>
       <ul
@@ -21,9 +24,7 @@ function GoogleTabs() {
         style={{ display: "flex", gap: "1rem", listStyle: "none" }}
       >
         <li
-          onClick={() => {
-            setCurrentTab("all");
-          }}
+          onClick={changeTabToAll}
           className={currentTab === "all" ? "active" : ""}
         >
           All

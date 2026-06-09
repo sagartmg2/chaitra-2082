@@ -54,5 +54,10 @@ th {
 .dark-mode {
   background: black;
   color: white;
-  min-height: 100vh;
+  /* min-height: 100vh; */
+}
+
+.tabs .active {
+  color: red;
+  text-decoration: underline;
 }
