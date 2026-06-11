@@ -5,6 +5,7 @@ import ChangeTheme from "./ChangeTheme";
 import GoogleTabs from "./GoogleTabs";
 import Header from "./components/layout/Header";
 import TodosCrud from "./TodosCrud";
+import Modal from "./Modal";
 
 export default function App() {
   return (
@@ -16,7 +17,8 @@ export default function App() {
       {/* <ChangeTheme /> */}
       {/* <GoogleTabs /> */}
       {/* <footer>footer</footer> */}
-      <TodosCrud/>
+      {/* <TodosCrud/> */}
+      <Modal/>
     </div>
   );
 }

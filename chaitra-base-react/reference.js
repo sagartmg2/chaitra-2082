@@ -27,3 +27,24 @@ newCourses.push("data-science");
 newCourses.push("ai");
 console.log(newCourses);
 console.log(courses);
+
+
+
+// -----
+
+
+
+ let todos = ["html", "css", "js"];
+    
+    // todos.splice(1, 1);
+    // console.log(todos);
+
+    let newtodos = todos.filter((el,index)=>{
+        if(index !== 1) {
+            return true
+        }
+    })
+
+    newtodos = todos.filter((el,index)=> index !==1)
+    console.log(newtodos);
+
