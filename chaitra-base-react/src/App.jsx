@@ -17,8 +17,8 @@ export default function App() {
       {/* <ChangeTheme /> */}
       {/* <GoogleTabs /> */}
       {/* <footer>footer</footer> */}
-      {/* <TodosCrud/> */}
-      <Modal/>
+      <TodosCrud/>
+      {/* <Modal/> */}
     </div>
   );
 }

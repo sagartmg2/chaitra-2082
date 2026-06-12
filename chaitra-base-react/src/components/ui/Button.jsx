@@ -1,11 +1,13 @@
 // props  = {size:"xl" ,rounded:"true" ,label:"view more"}
 
 export default function Button(props) {
-  let { label, size, rounded, children,...rest } = props; // object desructuring
+  let { label, size, rounded, children, ...rest } = props; // object desructuring
 
   let className = "btn ";
 
-  if (size == "sm") {
+  if (size == "xs") {
+    className += "btn-xs";
+  } else if (size == "sm") {
     className += "btn-sm";
   } else if (size == "lg") {
     className += "btn-lg";
@@ -16,7 +18,11 @@ export default function Button(props) {
   }
 
   //   return <button disabled={props.disabled} className={`btn ${props.rounded ? "rounded":""}  ${props.size == "sm" ? "btn-sm" : props.size =="lg" ? "btn-lg":""}`}>{props.label}</button>;
-  return <button {...rest} className={className}>{label ? label : children}</button>;
+  return (
+    <button {...rest} className={className}>
+      {label ? label : children}
+    </button>
+  );
 }
 
 export function ButtonOld(props) {
