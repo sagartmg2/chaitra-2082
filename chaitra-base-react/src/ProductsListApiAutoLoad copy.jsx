@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Button from "./components/ui/Button";
 
-function ProductsListApi() {
+let apiFetched = false;
+
+/* 
+  COMPONENT lIFECYCLE
+    - componentDidMount
+    - componentDidUpdate
+    - componentDidUnmount
+
+
+  useEffect
+
+
+*/
+
+export default function ProductsListApiAutoLoad() {
+  console.log("render | re-render");
   const [products, setProducts] = useState([]);
   const [searchTitle, setSearchTitle] = useState("");
 
-  
+  console.log({ apiFetched });
 
-// axios
-//       .get("https://dummyjson.com/products/search?q=" + searchTitle)
-//       .then((res) => {
-//         console.log(res.data.products);
-//         setProducts(res.data.products);
-//       })
-//       .catch((err) => {
-//         alert(err.message);
-//       });
-
-  const fetchProducts = () => {
+  if (!apiFetched) {
+    apiFetched = true;
     axios
       .get("https://dummyjson.com/products/search?q=" + searchTitle)
       .then((res) => {
@@ -28,17 +34,22 @@ function ProductsListApi() {
       .catch((err) => {
         alert(err.message);
       });
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchProducts();
   };
+
+  useEffect(() => {
+    console.log("useEffect: component did mount");
+    
+    // console.log("useEffect: component did updated");
+  });
 
   return (
     <div className="ml-8">
       <p>Product List fetched from API</p>
-      <Button onClick={fetchProducts}> fetch all products</Button>
+      <br />
 
       <form onSubmit={handleSubmit}>
         <input
@@ -48,7 +59,6 @@ function ProductsListApi() {
           type="text"
           placeholder="title"
         />
-        <Button type="submit">Search</Button>
       </form>
 
       <ul className="pl-8 mt-12 list-disc">
@@ -56,13 +66,7 @@ function ProductsListApi() {
           return <li>{el.title}</li>;
         })}
       </ul>
-      {
-        products.length == 0
-        &&
-        <p>NO products found.</p>
-      }
+      {products.length == 0 && <p>NO products found.</p>}
     </div>
   );
 }
-
-export default ProductsListApi;

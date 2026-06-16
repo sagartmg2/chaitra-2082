@@ -8,3 +8,14 @@ DELETE  - DELETE
 
 eg:
 signup : users create 
+
+
+
+
+# status code
+
+success 200
+redirect 304
+client side error: 400
+    429 
+server side error: 500

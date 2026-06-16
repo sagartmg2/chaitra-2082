@@ -7,6 +7,7 @@ import Header from "./components/layout/Header";
 import TodosCrud from "./TodosCrud";
 import Modal from "./Modal";
 import ProductsListApi from "./ProductsListApi";
+import ProductsListApiAutoLoad from "./ProductsListApiAutoLoad";
 
 export default function App() {
   return (
@@ -20,7 +21,8 @@ export default function App() {
       {/* <footer>footer</footer> */}
       {/* <TodosCrud/> */}
       {/* <Modal/> */}
-      <ProductsListApi />
+      {/* <ProductsListApi /> */}
+      <ProductsListApiAutoLoad />
     </div>
   );
 }
