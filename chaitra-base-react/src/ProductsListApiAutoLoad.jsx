@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router";
 
 /* 
   COMPONENT lIFECYCLE
@@ -74,11 +75,17 @@ export default function ProductsListApiAutoLoad() {
         </div>
       </div>
 
-      <ul className="pl-8 mt-12 list-disc">
+      <div className="gap-4  mt-12 grid grid-cols-4">
         {products.map((el) => {
-          return <li key={el.id}>{el.title}</li>;
+          return (
+            <Link to={`/products/${el.id}`} className="border p-4" key={el.id}>
+              <img src={el.thumbnail} />
+              <p>{el.title}</p>
+              <p>${el.price}</p>
+            </Link>
+          );
         })}
-      </ul>
+      </div>
       {products.length == 0 && <p>NO products found.</p>}
     </div>
   );

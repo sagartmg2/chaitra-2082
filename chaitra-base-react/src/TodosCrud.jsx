@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { todos } from "./data/todos";
 // import Button from "./components/ui/Button";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,24 +11,7 @@ function TodosCrud() {
   const [title, setTitle] = useState("");
   // const [todos, setTodos] = useState(["html", "css", "js"]);
 
-  const [todos, setTodos] = useState([
-    {
-      title: "html",
-      completed: true,
-    },
-    {
-      title: "css",
-      completed: true,
-    },
-    {
-      title: "js",
-      completed: true,
-    },
-    {
-      title: "react",
-      completed: false,
-    },
-  ]);
+  const [todos, setTodos] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,6 +32,8 @@ function TodosCrud() {
       let oldTodos = [...todos]; // [{},{}]
       oldTodos.push({ title: e.target.title.value, completed: false }); // [{},{},"express"]
 
+      // localStorage.setItem("todos", JSON.stringify(oldTodos));
+
       // setTodos(["html", "css", "js", "database"]);
       setTodos(oldTodos);
       clear();
@@ -59,6 +44,7 @@ function TodosCrud() {
         completed: e.target.status_check.checked,
       };
 
+      // localStorage.setItem("todos", JSON.stringify(oldTodos));
       setTodos(oldTodos);
       clear();
     }
@@ -73,8 +59,9 @@ function TodosCrud() {
     // let oldTodos = [...todos]
     // oldTodos.splice(indexToDelete, 1);
     // setTodos(oldTodos);
-
-    setTodos(todos.filter((el, index) => index !== indexToDelete));
+    let oldTodos = todos.filter((el, index) => index !== indexToDelete);
+    // localStorage.setItem("todos", JSON.stringify(oldTodos));
+    setTodos(oldTodos);
   };
 
   const toggleStauts = (index) => {
@@ -85,8 +72,21 @@ function TodosCrud() {
       completed: !todos[index].completed,
     };
 
+    // localStorage.setItem("todos", JSON.stringify(oldTodos));
+
     setTodos(oldTodos);
   };
+
+  useEffect(() => {
+    let localTodos = JSON.parse(localStorage.getItem("todos"));
+    setTodos(localTodos || []);
+  }, []);
+
+  
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+
 
   console.log("render | re-render");
 
@@ -107,6 +107,18 @@ function TodosCrud() {
         <button>{editIndex === null ? "add" : "edit"}</button>
         {title && <button onClick={clear}>clear</button>}
       </form>
+
+      <Button
+        onClick={() => {
+          setTodos([]);
+          // localStorage.setItem("todos", JSON.stringify([]));
+          localStorage.removeItem("todos");
+        }}
+      >
+        Clear All
+      </Button>
+      <br />
+      <br />
       <ul style={{ listStyle: "none" }}>
         {todos.map((el, index) => (
           <li key={index} className="mb-">

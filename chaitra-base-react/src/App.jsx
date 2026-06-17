@@ -1,3 +1,4 @@
+import { createBrowserRouter, RouterProvider } from "react-router";
 import Todos from "./Todos";
 import Courses from "./Courses";
 import Counter from "./Counter";
@@ -8,8 +9,17 @@ import TodosCrud from "./TodosCrud";
 import Modal from "./Modal";
 import ProductsListApi from "./ProductsListApi";
 import ProductsListApiAutoLoad from "./ProductsListApiAutoLoad";
+import ProductDetail from "./ProductDetail";
 
 export default function App() {
+  const router = createBrowserRouter([
+    { path: "/todos", Component: TodosCrud },
+    { path: "/products", Component: ProductsListApiAutoLoad },
+    { path: "/products/:id", Component: ProductDetail },
+  ]);
+
+  return <RouterProvider router={router} />;
+
   return (
     <div className="">
       {/* <Header /> */}
