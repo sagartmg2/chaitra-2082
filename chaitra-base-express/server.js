@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("welcome to express api !");
+  res.send({ msg: "welcome to express api !" });
 });
 
 /* assuming this is database todos */
@@ -26,7 +26,18 @@ app.get("/api/todos", (req, res) => {
 });
 
 app.post("/api/todos", (req, res) => {
-  //   throw new Error("server error");
+  if (!req.body.title) {
+    return res.status(400).send({
+      msg: "bad request",
+      erros: [
+        {
+          field: "title",
+          msg: "required",
+        },
+      ],
+    });
+  }
+
   todos.push({ title: req.body.title, completed: false });
   res.send({ msg: "todos created" });
 });
@@ -37,7 +48,26 @@ app.delete("/api/clear-todos", (req, res) => {
 });
 
 app.put("/api/todos/:index", (req, res) => {
-//   console.log(req.params);
+  if (
+    !req.body.title ||
+    (req.body.completed != true && req.body.completed != false)
+  ) {
+    return res.status(400).send({
+      msg: "bad request",
+      erros: [
+        {
+          field: "title",
+          msg: "required",
+        },
+        {
+          field: "completed",
+          msg: "required",
+        },
+      ],
+    });
+  }
+
+  //   console.log(req.params);
   todos[req.params.index] = {
     title: req.body.title,
     completed: req.body.completed,
