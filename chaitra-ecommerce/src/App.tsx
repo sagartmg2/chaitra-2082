@@ -1,19 +1,38 @@
-import { ShoppingCart } from "lucide-react";
+import { createBrowserRouter, RouterProvider } from "react-router";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import ProductDetail from "./pages/products/ProductDetail";
+import ProductListing from "./pages/products/ProductListing";
+import RootLayout from "./components/layouts/RootLayout";
 
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "",
+      Component: RootLayout,
+      children: [
+        { path: "/", Component: Home },
+        { path: "/login", Component: Login },
+        {
+          path: "/products",
+          children: [
+            {
+              path: "",
+              Component: ProductListing,
+            },
+            {
+              path: "detail",
+              Component: ProductDetail,
+            },
+          ],
+        },
+      ],
+    },
+  ]);
+
   return (
     <>
-      <header className="flex justify-between p-4  text-white bg-[#7E33E0]">
-        <div>
-          <span className="mr-3">mer@gamil.com</span>
-          <span>+977 9840234234</span>
-        </div>
-        <div className="flex">
-          <span>User</span>
-          <ShoppingCart />
-        </div>
-      </header>
-      <div>App component</div>
+      <RouterProvider router={router} />
     </>
   );
 }
