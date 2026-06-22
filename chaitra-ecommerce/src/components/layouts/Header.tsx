@@ -19,7 +19,7 @@ function Header() {
             </div>
           </div>
         </div>
-        <div className="container flex items-center justify-between">
+        <div className="container flex items-center justify-between my-5">
           <Link
             to="/"
             className="text-[34px] font-semibold text-primary-dark font-josefin"
