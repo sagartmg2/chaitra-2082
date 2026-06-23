@@ -1,29 +1,26 @@
 import React from "react";
 import Header from "../components/layouts/Header";
+import Banner from "../assets/banner.png";
 
 export default function Home() {
   return (
     <>
-      <div className="font-lato">banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
-      <div>banerr....</div>
+      <div className=""></div>
+      {/* <img src="../src/assets/banner.png" /> */}
+      <div className="relative">
+        <img src={Banner}  className="w-full"/>
+        <div className="absolute top-1/2 left-0 w-full   " style={{transform:"translateY(-50%)"}}>
+          <div className="container pl-15">
+            <p className="font-josefin font-bold text-[24px] sm:text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px] 2xl:text-[56px]">
+              New Furniture Collection
+            </p>
+            <p className="font-josefin font-bold text-[24px] sm:text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px] 2xl:text-[56px]">
+              Trends in 2020
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div>
         <div className="grid grid-cols-4 container">
           {[1, 2, 3, 4].map((el) => {

@@ -7,6 +7,12 @@
     top:0;
 } */
 
+/* 
+input:focus{
+  border: 3px solid pink;
+  outline: none;
+} */
+
 @import "tailwindcss";
 
 @theme {

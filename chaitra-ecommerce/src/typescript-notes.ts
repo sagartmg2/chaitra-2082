@@ -104,4 +104,4 @@ const sum = (firstInput:number, secondInput:number) : number => firstInput + sec
 
 
 // console.log(sum("1","2")); //error: //result: 12
-console.log(sum(1,2)); // 3
+console.log(sum(1,2,5)); // 3

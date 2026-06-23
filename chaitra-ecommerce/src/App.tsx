@@ -4,15 +4,24 @@ import Login from "./pages/Login";
 import ProductDetail from "./pages/products/ProductDetail";
 import ProductListing from "./pages/products/ProductListing";
 import RootLayout from "./components/layouts/RootLayout";
+import Signup from "./pages/Signup";
+import { useState } from "react";
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   const router = createBrowserRouter([
     {
       path: "",
-      Component: RootLayout,
+      // Component: RootLayout,
+      element: <RootLayout isLoggedIn={isLoggedIn} />,
       children: [
         { path: "/", Component: Home },
-        { path: "/login", Component: Login },
+        { path: "/login",
+          //  Component: Login\
+           element:<Login setIsLoggedIn={setIsLoggedIn}/>
+           },
+        { path: "/register", Component: Signup },
         {
           path: "/products",
           children: [

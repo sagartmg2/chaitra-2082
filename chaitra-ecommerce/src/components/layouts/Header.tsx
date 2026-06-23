@@ -1,7 +1,11 @@
 import { ChevronDown, Search, ShoppingCart } from "lucide-react";
+import { useState } from "react";
 import { Link } from "react-router";
+type propsType ={
+  isLoggedIn: boolean 
+}
 
-function Header() {
+function Header({ isLoggedIn }: propsType) {
   return (
     <>
       <header>
@@ -37,8 +41,12 @@ function Header() {
               {" "}
               <Link to={"/products"}>products</Link>
             </li>
-            <li>Orders</li>
-            <li>carts</li>
+            {isLoggedIn && (
+              <>
+                <li>Orders</li>
+                <li>carts</li>
+              </>
+            )}
           </ul>
           <form className="flex items-center">
             <input className=" border-[#E7E6EF] border-2 " />
