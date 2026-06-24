@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import Header from "../components/layouts/Header";
 import BreadCrumb from "../components/BreadCrumb";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 type propsType = {
   setIsLoggedIn: (status: boolean) => void;
 };
 
 export default function Login({ setIsLoggedIn }: propsType) {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -21,6 +24,7 @@ export default function Login({ setIsLoggedIn }: propsType) {
       })
       .then((res) => {
         // react toasting..
+        navigate("/");
         setIsLoggedIn(true);
         console.log("logoin sucucessfulll");
       })
@@ -46,6 +50,7 @@ export default function Login({ setIsLoggedIn }: propsType) {
           {/* Fields */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
+            required
               type="email"
               placeholder="Email Address"
               value={email}
