@@ -3,16 +3,20 @@ import Header from "../components/layouts/Header";
 import BreadCrumb from "../components/BreadCrumb";
 import axios from "axios";
 import { useNavigate } from "react-router";
+import { setUser } from "../redux/features/userSlice";
+import { useDispatch } from "react-redux";
+
 
 type propsType = {
   setIsLoggedIn: (status: boolean) => void;
 };
 
-export default function Login({ setIsLoggedIn }: propsType) {
+export default function Login() {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("buyer@gmail.com");
+  const [password, setPassword] = useState("password");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -24,8 +28,10 @@ export default function Login({ setIsLoggedIn }: propsType) {
       })
       .then((res) => {
         // react toasting..
-        navigate("/");
-        setIsLoggedIn(true);
+        // navigate("/");
+        dispatch(setUser(res.data.user))
+        // setUser()
+        // setIsLoggedIn(true);
         console.log("logoin sucucessfulll");
       })
       .catch((err) => {

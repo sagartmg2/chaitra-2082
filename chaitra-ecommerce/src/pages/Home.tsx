@@ -27,6 +27,7 @@ export default function Home() {
             return (
               <div className="border p-5">
                 <p>poructs</p>
+                <button>ADD TO CART</button>
               </div>
             );
           })}

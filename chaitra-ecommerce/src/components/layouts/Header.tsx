@@ -1,11 +1,23 @@
 import { ChevronDown, Search, ShoppingCart } from "lucide-react";
 import { useState } from "react";
+import type { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
-type propsType ={
-  isLoggedIn: boolean 
-}
+import { logout } from "../../redux/features/userSlice";
+type propsType = {
+  isLoggedIn: boolean;
+};
 
-function Header({ isLoggedIn }: propsType) {
+function Header() {
+  const reduxUser = useSelector((store: RootState) => store.user.value);
+  const dispatch = useDispatch();
+
+  console.log("header", { reduxUser });
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
   return (
     <>
       <header>
@@ -16,9 +28,17 @@ function Header({ isLoggedIn }: propsType) {
               <span>+977 9840234234</span>
             </div>
             <div className="flex">
-              <Link to="/login">login</Link>
-              {/* <a href="/login">login</a> */}
-              <span>User</span>
+              {reduxUser ? (
+                <>
+                  <span className="mr-4">{reduxUser.firstName}</span>
+                  <button onClick={handleLogout}>logout</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">login</Link>
+                </>
+              )}
+              &nbsp;
               <ShoppingCart />
             </div>
           </div>
@@ -41,10 +61,15 @@ function Header({ isLoggedIn }: propsType) {
               {" "}
               <Link to={"/products"}>products</Link>
             </li>
-            {isLoggedIn && (
+            {reduxUser && (
               <>
                 <li>Orders</li>
                 <li>carts</li>
+              </>
+            )}
+            {reduxUser && reduxUser.isSeller && (
+              <>
+                <li>My Products</li>
               </>
             )}
           </ul>

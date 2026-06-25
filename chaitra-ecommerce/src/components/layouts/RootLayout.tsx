@@ -9,11 +9,11 @@ type propsType ={
 }
 // export default function RootLayout(props) {
 // export default function RootLayout({ isLoggedIn }: { isLoggedIn: boolean }) {
-export default function RootLayout({ isLoggedIn }: propsType) {
+export default function RootLayout() {
   return (
     <>
       <div className="font-lato">
-        <Header isLoggedIn = {isLoggedIn} />
+        <Header />
         <Outlet />
         <Footer />
       </div>

@@ -100,8 +100,29 @@ double(32);
 // double("Two")
 
 
-const sum = (firstInput:number, secondInput:number) : number => firstInput + secondInput
+const sum = (firstInput: number, secondInput: number): number => firstInput + secondInput
 
 
 // console.log(sum("1","2")); //error: //result: 12
-console.log(sum(1,2,5)); // 3
+console.log(sum(1, 2, 5)); // 3
+
+
+
+
+interface Laptop {
+    brand: string
+    model: string
+}
+
+
+
+let laptop1: Laptop = {
+    brand: "dell",
+    model: "AG"
+}
+
+let laptop2 = {}
+
+
+// union types
+let totalPrice: number | string = "one"

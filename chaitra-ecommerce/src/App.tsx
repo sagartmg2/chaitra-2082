@@ -8,18 +8,17 @@ import Signup from "./pages/Signup";
 import { useState } from "react";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const router = createBrowserRouter([
     {
       path: "",
       // Component: RootLayout,
-      element: <RootLayout isLoggedIn={isLoggedIn} />,
+      element: <RootLayout />,
       children: [
         { path: "/", Component: Home },
         { path: "/login",
           //  Component: Login\
-           element:<Login setIsLoggedIn={setIsLoggedIn}/>
+           element:<Login />
            },
         { path: "/register", Component: Signup },
         {
