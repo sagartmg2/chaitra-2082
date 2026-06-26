@@ -6,14 +6,13 @@ import { useNavigate } from "react-router";
 import { setUser } from "../redux/features/userSlice";
 import { useDispatch } from "react-redux";
 
-
 type propsType = {
   setIsLoggedIn: (status: boolean) => void;
 };
 
 export default function Login() {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const [email, setEmail] = useState("buyer@gmail.com");
   const [password, setPassword] = useState("password");
@@ -29,7 +28,9 @@ export default function Login() {
       .then((res) => {
         // react toasting..
         // navigate("/");
-        dispatch(setUser(res.data.user))
+        localStorage.setItem("token", res.data.token);
+        dispatch(setUser(res.data.user));
+
         // setUser()
         // setIsLoggedIn(true);
         console.log("logoin sucucessfulll");
@@ -56,7 +57,7 @@ export default function Login() {
           {/* Fields */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
-            required
+              required
               type="email"
               placeholder="Email Address"
               value={email}
