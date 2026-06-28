@@ -17,7 +17,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(token ? true : false);
 
   useEffect(() => {
-    console.log("USE EFFFFFFFFFFFFFFF");
     if (token) {
       axios
         .get("https://ecom-zb9o.vercel.app/api/auth/me", {
@@ -55,7 +54,7 @@ function App() {
               Component: ProductListing,
             },
             {
-              path: "detail",
+              path: ":slug",
               Component: ProductDetail,
             },
           ],
@@ -64,7 +63,6 @@ function App() {
     },
   ]);
 
-  console.log("APPPPPPPPPPP  render......");
   return (
     <>
       {isLoading ? (

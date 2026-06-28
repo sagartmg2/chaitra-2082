@@ -13,14 +13,10 @@ function Header() {
   const reduxUser = useSelector((store: RootState) => store.user.value);
   const dispatch = useDispatch();
 
-  console.log("header", { reduxUser });
-
   const handleLogout = () => {
     // dispatch(setUser(null));
     dispatch(logout());
   };
-
-  console.log("render - rednder | TOp- HEADER");
 
   return (
     <>
