@@ -6,16 +6,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router";
 import { logout, setUser } from "../../redux/features/userSlice";
 
-
 function Navbar() {
   console.log("render | re-render NAVBAR");
   const reduxUser = useSelector((store: RootState) => store.user.value);
   return (
     <div>
-      <div className="container flex items-center justify-between my-5">
+      <div className="container my-5 flex items-center justify-between">
         <Link
           to="/"
-          className="text-[34px] font-semibold text-primary-dark font-josefin"
+          className="text-primary-dark font-josefin text-[34px] font-semibold"
         >
           Hekto
         </Link>
@@ -30,10 +29,15 @@ function Navbar() {
             {" "}
             <Link to={"/products"}>products</Link>
           </li>
+          <li>
+            <Link to={"/carts"}>Carts</Link>
+          </li>
           {reduxUser && (
             <>
               <li>Orders</li>
-              <li>carts</li>
+              <li>
+                <Link to={"/carts"}>Carts</Link>
+              </li>
             </>
           )}
           {reduxUser && reduxUser.isSeller && (
@@ -43,8 +47,8 @@ function Navbar() {
           )}
         </ul>
         <form className="flex items-center">
-          <input className=" border-[#E7E6EF] border-2 " />
-          <button className="text-white bg-secondary py-2 px-3">
+          <input className="border-2 border-[#E7E6EF]" />
+          <button className="bg-secondary px-3 py-2 text-white">
             <Search className="" />
           </button>
         </form>

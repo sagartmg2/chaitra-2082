@@ -16,10 +16,34 @@ function ProductListing() {
       setCategories(res.data.data);
     });
 
-    axios.get("https://ecom-zb9o.vercel.app/api/products?limit=2").then((res) => {
+    axios.get("https://ecom-zb9o.vercel.app/api/products").then((res) => {
       setProducts(res.data.data.products);
     });
   }, []);
+
+  const handleAddToCart = (id: number) => {
+    let token = localStorage.getItem("token");
+
+    if (token) {
+      axios
+        .post(
+          "https://ecom-zb9o.vercel.app/api/carts",
+          {
+            productId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then((res) => {
+          console.log("added to cart");
+        });
+    } else {
+      console.log("login required..");
+    }
+  };
 
   return (
     <>
@@ -100,7 +124,12 @@ function ProductListing() {
                       </p>
                     </div>
                     <div className="mt-3 flex gap-2">
-                      <ShoppingCart />
+                      <ShoppingCart
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleAddToCart(el.id);
+                        }}
+                      />
                       <Heart />
                     </div>
                   </div>

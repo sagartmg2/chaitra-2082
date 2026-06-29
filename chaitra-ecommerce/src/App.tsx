@@ -9,6 +9,9 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { setUser } from "./redux/features/userSlice";
 import { useDispatch } from "react-redux";
+import Carts from "./pages/Carts";
+import ProtectedRoute from "./components/layouts/ProtectedRoute";
+import Orders from "./pages/Orders";
 
 function App() {
   let token = localStorage.getItem("token");
@@ -59,6 +62,20 @@ function App() {
             },
           ],
         },
+        {
+          path: "",
+          Component: ProtectedRoute,
+          children: [
+            {
+              path: "/carts",
+              Component: Carts,
+            },
+            {
+              path: "/orders",
+              Component: Orders,
+            },
+          ],
+        },
       ],
     },
   ]);
@@ -66,7 +83,7 @@ function App() {
   return (
     <>
       {isLoading ? (
-        <div className="h-screen flex justify-center items-center">
+        <div className="flex h-screen items-center justify-center">
           <p className="text-5xl font-bold">is loading.......</p>
         </div>
       ) : (

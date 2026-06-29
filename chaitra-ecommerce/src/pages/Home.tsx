@@ -3,6 +3,7 @@ import Header from "../components/layouts/Header";
 import Banner from "../assets/banner.png";
 
 export default function Home() {
+console.log("render HOOOOOOOME")
   return (
     <>
       <div className=""></div>
