@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import type { RootState } from "../redux/store";
 import { Navigate, useNavigate } from "react-router";
+import BreadCrumb from "../components/BreadCrumb";
 
 function Carts() {
   console.log("rdner ... carts.....");
@@ -22,6 +23,11 @@ function Carts() {
   return (
     <div className="carts">
       <>
+        <BreadCrumb 
+        title="Carts"
+        url = "/carts"
+
+         />
         <p>CARTS 1</p>
         <p>CARTS 1</p>
         <p>CARTS 1</p>

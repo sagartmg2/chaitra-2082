@@ -8,24 +8,24 @@ function ProductDetail() {
 
   return (
     <div>
-      <BreadCrumb  />
+      <BreadCrumb title="Product Detail" url="/products" />
       <div className="container">
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
-            <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
+        <p>product detail</p>
       </div>
     </div>
   );

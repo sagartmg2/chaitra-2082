@@ -10,16 +10,33 @@ function ProductListing() {
 
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [isProductsLoading, setIsProductsLoading] = useState(true);
+  // const [perPage, setPerPage] = useState(20);
+  // const [sortBy, setSortBy] = useState("");
+
+  const [filter, setFilter] = useState({
+    perPage: 2,
+    sortBy: "",
+    categoryIds: [1, 2, 3],
+  });
 
   useEffect(() => {
     axios.get("https://ecom-zb9o.vercel.app/api/categories").then((res) => {
       setCategories(res.data.data);
     });
-
-    axios.get("https://ecom-zb9o.vercel.app/api/products").then((res) => {
-      setProducts(res.data.data.products);
-    });
   }, []);
+
+  useEffect(() => {
+    setIsProductsLoading(true);
+    axios
+      .get(
+        `https://ecom-zb9o.vercel.app/api/products?limit=${filter.perPage}&sort=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
+      )
+      .then((res) => {
+        setProducts(res.data.data.products);
+        setIsProductsLoading(false);
+      });
+  }, [filter]);
 
   const handleAddToCart = (id: number) => {
     let token = localStorage.getItem("token");
@@ -45,9 +62,17 @@ function ProductListing() {
     }
   };
 
+  const handlePerPageChange = (e) => {
+    e.target.value;
+    // setFilter(prev => ({...prev,perPage:e.targt.value}))
+    setFilter({ ...filter, perPage: e.target.value });
+    // setPerPage(e.target.value);
+    // console.log(e.target.value);
+  };
+
   return (
     <>
-      <BreadCrumb />
+      <BreadCrumb title="Products" url="/products" />
       <div className="container mt-[32px] sm:mt-[40px] md:mt-[56px] lg:mt-[72px] xl:mt-[96px] 2xl:mt-[128px]">
         <div className="flex items-center gap-8">
           <div>
@@ -57,19 +82,33 @@ function ProductListing() {
             <p>About 9,620 results (0.62 seconds)</p>
           </div>
           <div className="flex gap-8">
-            <select className="border">
+            <span>Per page</span>
+            <select
+              value={filter.perPage}
+              className="border"
+              onChange={handlePerPageChange}
+            >
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
               <option>5</option>
               <option>10</option>
               <option>15</option>
               <option>20</option>
             </select>
-
-            <select className="border">
-              <option>Sort By</option>
-              <option>Newest</option>
-              <option>Oldest</option>
-              <option>price lowest </option>
-              <option>price highest</option>
+            <select
+              className="border"
+              value={filter.sortBy}
+              onChange={(e) => {
+                // setSortBy(e.target.value);
+                setFilter({ ...filter, sortBy: e.target.value });
+              }}
+            >
+              <option value="">Sort By</option>
+              <option value="latest">Latest</option>
+              <option value="oldest">Oldest</option>
+              <option value="priceAsc">price low to high </option>
+              <option value="priceDesc">price hight to low</option>
             </select>
           </div>
         </div>
@@ -81,61 +120,72 @@ function ProductListing() {
             {categories.map((el) => {
               return (
                 <div>
-                  <input type="checkbox" className="mt-2 mr-2" />
-                  <label> {el.title}</label>
+                  <input id={`category-${el.id}`}  type="checkbox" className="mt-2 mr-2" />
+                  <label htmlFor={`category-${el.id}`} > {el.title}</label>
                 </div>
               );
             })}
           </div>
-          {/* products section */}
           <div className="col-span-8">
-            {products.map((el) => {
-              return (
-                <Link
-                  to={`/products/${el.id}`}
-                  className="mt-8 flex gap-6 rounded-2xl bg-white p-5 shadow-md transition-shadow duration-300 hover:shadow-lg sm:mt-9 sm:p-4 lg:mt-9"
-                >
-                  <div className="h-44 w-52 flex-shrink-0 overflow-hidden rounded-xl bg-gray-100">
-                    <img
-                      src={"image"}
-                      alt={"mouse"}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
+            {isProductsLoading ? (
+              <>
+                <p>loading......</p>
+              </>
+            ) : (
+              <>
+                {products.length == 0 ? (
+                  <>products not found</>
+                ) : (
+                  products.map((el) => {
+                    return (
+                      <Link
+                        to={`/products/${el.id}`}
+                        className="mt-8 flex gap-6 rounded-2xl bg-white p-5 shadow-md transition-shadow duration-300 hover:shadow-lg sm:mt-9 sm:p-4 lg:mt-9"
+                      >
+                        <div className="h-44 w-52 flex-shrink-0 overflow-hidden rounded-xl bg-gray-100">
+                          <img
+                            src={"image"}
+                            alt={"mouse"}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
 
-                  <div className="flex min-w-0 flex-1 flex-col justify-between py-1">
-                    <div>
-                      <div className="mb-1 flex items-center gap-3">
-                        <h2 className="text-primary text-lg font-bold capitalize">
-                          {el.title}
-                        </h2>
-                        <div className="flex gap-1.5"></div>
-                      </div>
-                      <div className="mb-2 flex items-center gap-3">
-                        <span className="text-primary text-sm font-semibold">
-                          ${el.price}
-                        </span>
-                        <span className="text-secondary text-sm line-through">
-                          ${100}.00
-                        </span>
-                      </div>
-                      <p className="line-clamp-2 text-sm leading-[28px] text-gray-500">
-                        {el.description}
-                      </p>
-                    </div>
-                    <div className="mt-3 flex gap-2">
-                      <ShoppingCart
-                        onClick={(e) => {
-                          e.preventDefault();
-                          handleAddToCart(el.id);
-                        }}
-                      />
-                      <Heart />
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
+                        <div className="flex min-w-0 flex-1 flex-col justify-between py-1">
+                          <div>
+                            <div className="mb-1 flex items-center gap-3">
+                              <h2 className="text-primary text-lg font-bold capitalize">
+                                {el.title}
+                              </h2>
+                              <div className="flex gap-1.5"></div>
+                            </div>
+                            <div className="mb-2 flex items-center gap-3">
+                              <span className="text-primary text-sm font-semibold">
+                                ${el.price}
+                              </span>
+                              <span className="text-secondary text-sm line-through">
+                                ${100}.00
+                              </span>
+                            </div>
+                            <p className="line-clamp-2 text-sm leading-[28px] text-gray-500">
+                              {el.description}
+                            </p>
+                          </div>
+                          <div className="mt-3 flex gap-2">
+                            <ShoppingCart
+                              onClick={(e) => {
+                                e.preventDefault();
+                                handleAddToCart(el.id);
+                              }}
+                            />
+                            <Heart />
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
