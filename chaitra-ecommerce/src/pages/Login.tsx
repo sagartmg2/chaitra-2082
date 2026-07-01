@@ -43,11 +43,7 @@ export default function Login() {
 
   return (
     <>
-      <BreadCrumb 
-      url = "/login"
-      title="My Account"
-
-       />
+      <BreadCrumb />
       <div className="flex items-center justify-center bg-gray-100 px-4 py-12">
         <div className="w-full max-w-md rounded-2xl bg-white p-10 shadow-sm">
           {/* Header */}

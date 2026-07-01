@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import BreadCrumb from "../../components/BreadCrumb";
-import { Link, useLocation } from "react-router";
+import { Link, useLocation, useSearchParams } from "react-router";
 import axios from "axios";
 import { Heart, ShoppingCart } from "lucide-react";
+// import { URLSearchParams } from "url";
 
 function ProductListing() {
   const location = useLocation();
   console.log(location.pathname);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   const [categories, setCategories] = useState([]);
   const [products, setProducts] = useState([]);
@@ -14,8 +17,12 @@ function ProductListing() {
   // const [perPage, setPerPage] = useState(20);
   // const [sortBy, setSortBy] = useState("");
 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  console.log("product listing", searchParams.get("q"));
+
   const [filter, setFilter] = useState({
-    perPage: 2,
+    perPage: searchParams.get("perPage") || 2,
     sortBy: "",
     categoryIds: [1, 2, 3],
   });
@@ -28,15 +35,17 @@ function ProductListing() {
 
   useEffect(() => {
     setIsProductsLoading(true);
+
+    let searchTerm = searchParams.get("q") || "";
     axios
       .get(
-        `https://ecom-zb9o.vercel.app/api/products?limit=${filter.perPage}&sort=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
+        `https://ecom-zb9o.vercel.app/api/products?q=${searchTerm}&limit=${filter.perPage}&s=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
       )
       .then((res) => {
         setProducts(res.data.data.products);
         setIsProductsLoading(false);
       });
-  }, [filter]);
+  }, [filter, searchParams]);
 
   const handleAddToCart = (id: number) => {
     let token = localStorage.getItem("token");
@@ -62,17 +71,42 @@ function ProductListing() {
     }
   };
 
+  // http://localhost:5173/products?perPage=2
+
   const handlePerPageChange = (e) => {
     e.target.value;
     // setFilter(prev => ({...prev,perPage:e.targt.value}))
     setFilter({ ...filter, perPage: e.target.value });
     // setPerPage(e.target.value);
     // console.log(e.target.value);
+
+    // http://localhost:5173/products?q="mouse"
+    // http://localhost:5173/products?perPage=5
+
+    // http://localhost:5173/products?q="mouse"&perPage=5
+
+    // setSearchParams({
+    //   perPage: e.target.value,
+    // });
+
+    setSearchParams((prev) => {
+      let urlParms = new URLSearchParams(prev);
+      urlParms.set("perPage", e.target.value);
+      return urlParms;
+    });
   };
 
   return (
     <>
-      <BreadCrumb title="Products" url="/products" />
+      <BreadCrumb
+        title="Products"
+        urls={[
+          {
+            title: "products",
+            link: "/products",
+          },
+        ]}
+      />
       <div className="container mt-[32px] sm:mt-[40px] md:mt-[56px] lg:mt-[72px] xl:mt-[96px] 2xl:mt-[128px]">
         <div className="flex items-center gap-8">
           <div>
@@ -120,8 +154,12 @@ function ProductListing() {
             {categories.map((el) => {
               return (
                 <div>
-                  <input id={`category-${el.id}`}  type="checkbox" className="mt-2 mr-2" />
-                  <label htmlFor={`category-${el.id}`} > {el.title}</label>
+                  <input
+                    id={`category-${el.id}`}
+                    type="checkbox"
+                    className="mt-2 mr-2"
+                  />
+                  <label htmlFor={`category-${el.id}`}> {el.title}</label>
                 </div>
               );
             })}

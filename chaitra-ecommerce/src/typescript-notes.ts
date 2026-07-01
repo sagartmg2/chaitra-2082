@@ -125,4 +125,4 @@ let laptop2 = {}
 
 
 // union types
-let totalPrice: number | string = "one"
+let totalPrice: number | string = 123
