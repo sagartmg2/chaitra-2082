@@ -27,9 +27,9 @@ export default function Login() {
       })
       .then((res) => {
         // react toasting..
-        // navigate("/");
         localStorage.setItem("token", res.data.token);
         dispatch(setUser(res.data.user));
+        navigate("/");
 
         // setUser()
         // setIsLoggedIn(true);

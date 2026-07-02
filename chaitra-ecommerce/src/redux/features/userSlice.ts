@@ -4,7 +4,6 @@ export interface UserState {
     value: null | {
         firstName: string
         email: string
-        role: string
         isAdmin: boolean
         isSeller: boolean
     }

@@ -24,10 +24,10 @@ function Navbar() {
 
     if (location.pathname == "/products") {
       console.log("heree11111");
+      // http://localhost:5173/products?q=mouse&perPage=10
       // setSearchParams({
       //   q: e.target.searchTerm.value,
       // });
-
       setSearchParams((prev) => {
         let urlParms = new URLSearchParams(prev);
         urlParms.set("q", e.target.searchTerm.value);
@@ -37,6 +37,7 @@ function Navbar() {
       console.log("heree22222");
 
       navigate("/products?q=" + e.target.searchTerm.value);
+      // navigate("/products");
     }
 
     console.log(searchParams.get("q")); // http://localhost:5173/products?q=mouse  // i want the value of q
@@ -77,7 +78,9 @@ function Navbar() {
           )}
           {reduxUser && reduxUser.isSeller && (
             <>
-              <li>My Products</li>
+              <li>
+                <Link to={"/seller/products"}>My Products</Link>
+              </li>
             </>
           )}
         </ul>

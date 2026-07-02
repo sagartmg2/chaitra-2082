@@ -39,7 +39,10 @@ function Header() {
                 </>
               )}
               &nbsp;
-              <ShoppingCart />
+              <div className="relative">
+                <ShoppingCart />
+                <span className=" absolute -top-4 -right-7  w-8 h-8 flex items-center justify-center rounded-full bg-red-500 text-white">1</span>
+              </div>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ function ProductListing() {
 
   const [filter, setFilter] = useState({
     perPage: searchParams.get("perPage") || 2,
-    sortBy: "",
+    sortBy: searchParams.get("srt") || '',
     categoryIds: [1, 2, 3],
   });
 
@@ -39,7 +39,7 @@ function ProductListing() {
     let searchTerm = searchParams.get("q") || "";
     axios
       .get(
-        `https://ecom-zb9o.vercel.app/api/products?q=${searchTerm}&limit=${filter.perPage}&s=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
+        `https://ecom-zb9o.vercel.app/api/products?q=${searchTerm}&limit=${filter.perPage}&sort=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
       )
       .then((res) => {
         setProducts(res.data.data.products);
@@ -96,6 +96,32 @@ function ProductListing() {
     });
   };
 
+  
+
+
+  const handleSortChange = (e) => {
+    // e.target.value;
+    // setFilter(prev => ({...prev,perPage:e.targt.value}))
+    setFilter({ ...filter, sortBy: e.target.value });
+    // setPerPage(e.target.value);
+    // console.log(e.target.value);
+
+    // http://localhost:5173/products?q="mouse"
+    // http://localhost:5173/products?perPage=5
+
+    // http://localhost:5173/products?q="mouse"&perPage=5
+
+    // setSearchParams({
+    //   perPage: e.target.value,
+    // });
+
+    setSearchParams((prev) => {
+      let urlParms = new URLSearchParams(prev);
+      urlParms.set("srt", e.target.value);
+      return urlParms;
+    });
+  };
+
   return (
     <>
       <BreadCrumb
@@ -133,10 +159,7 @@ function ProductListing() {
             <select
               className="border"
               value={filter.sortBy}
-              onChange={(e) => {
-                // setSortBy(e.target.value);
-                setFilter({ ...filter, sortBy: e.target.value });
-              }}
+              onChange={handleSortChange}
             >
               <option value="">Sort By</option>
               <option value="latest">Latest</option>

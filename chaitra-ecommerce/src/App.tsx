@@ -12,6 +12,8 @@ import { useDispatch } from "react-redux";
 import Carts from "./pages/Carts";
 import ProtectedRoute from "./components/layouts/ProtectedRoute";
 import Orders from "./pages/Orders";
+import SellerProducts from "./pages/seller/SellerProducts";
+import AddProduct from "./pages/seller/AddProduct";
 
 function App() {
   let token = localStorage.getItem("token");
@@ -32,6 +34,17 @@ function App() {
         })
         .finally(() => {
           setIsLoading(false);
+        });
+
+      axios
+        .get("https://ecom-zb9o.vercel.app/api/carts", {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        })
+        .then((res) => {
+          // updateReduxCartCout(res.data.data)
+          // updateReduxCartCout(res.data.data.length)
         });
     }
   }, []);
@@ -73,6 +86,20 @@ function App() {
             {
               path: "/orders",
               Component: Orders,
+            },
+          ],
+        },
+        {
+          path: "seller",
+          element: <ProtectedRoute forSeller={true}/>,
+          children: [
+            {
+              path: "products",
+              Component: SellerProducts,
+            },
+            {
+              path: "add-product",
+              Component: AddProduct,
             },
           ],
         },
