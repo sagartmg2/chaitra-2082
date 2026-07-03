@@ -10,7 +10,7 @@ export default function CartPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchCarts = () =>{
+  const fetchCarts = () => {
     axios
       .get("https://ecom-zb9o.vercel.app/api/carts", {
         headers: {
@@ -26,6 +26,7 @@ export default function CartPage() {
           qty: cartItem.quantity,
           stock: cartItem.product.stock,
           img: cartItem.product.images?.[0] || PLACEHOLDER_IMG,
+          sellerId: cartItem.product.user.id,
           sellerName: cartItem.product.user.firstName,
           shippingCharge: parseFloat(
             cartItem.product.user.shipping_charge || 0,
@@ -35,14 +36,14 @@ export default function CartPage() {
       })
       .catch((err) => setError(err.message))
       .finally(() => setLoading(false));
-  }
+  };
 
   useEffect(() => {
-    fetchCarts()
+    fetchCarts();
   }, []);
 
   const updateQty = (productId, id, quantity) => {
-    console.log({quantity});
+    console.log({ quantity });
     setItems((prev) =>
       prev.map((it) =>
         it.id === id
@@ -50,17 +51,21 @@ export default function CartPage() {
           : it,
       ),
     );
-    
-    axios.post(
-      `https://ecom-zb9o.vercel.app/api/carts`,
-      {
-        productId,
-        quantity: quantity,
-      },
-      { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` } },
-    ).then(res =>{
-      // fetchCarts()
-    })
+
+    axios
+      .post(
+        `https://ecom-zb9o.vercel.app/api/carts`,
+        {
+          productId,
+          quantity: quantity,
+        },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
+        },
+      )
+      .then((res) => {
+        // fetchCarts()
+      });
   };
 
   const removeItem = (id) => {
@@ -74,11 +79,71 @@ export default function CartPage() {
   const subtotal = items.reduce((sum, it) => sum + it.price * it.qty, 0);
 
   // Shipping: one flat charge per distinct seller in the cart
-  const shipping = Array.from(
-    new Map(items.map((it) => [it.sellerName, it.shippingCharge])).values(),
-  ).reduce((sum, charge) => sum + charge, 0);
+
+  // const shipping = Array.from(
+  //   new Map(items.map((it) => [it.sellerName, it.shippingCharge])).values(),
+  // ).reduce((sum, charge) => sum + charge, 0);
+
+  let distinctSellers = [
+    // {sellerId:1,shippingCarge:100},
+    // {sellerId:2,shippingCarge:50}
+  ];
+
+  items.forEach((el) => {
+    let exists = distinctSellers.find((seller) => {
+      return seller.sellerId == el.sellerId;
+    });
+    if (!exists) {
+      distinctSellers.push({
+        sellerId: el.sellerId,
+        shippingCharge: el.shippingCharge,
+      });
+    }
+  });
+
+  console.log({ distinctSellers });
+
+  let shipping = 0;
+  distinctSellers.forEach((el) => {
+    shipping += el.shippingCharge;
+  });
 
   const total = subtotal + shipping;
+
+  const placeOrder = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(
+        "https://ecom-zb9o.vercel.app/api/orders",
+        {
+          phone: "9840000000",
+          paymentMode: "esewa",
+          address: "Kathmandu",
+          secondaryAddress: "",
+          // products: [
+          //   {
+          //     productId: 1,
+          //     quantity: 1,
+          //   },
+          // ],
+          products: items.map((el) => {
+            return {
+              productId: el.productId,
+              quantity: el.qty,
+            };
+          }),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
+      )
+      .then((res) => {})
+      .catch((err) => {})
+      .finally(() => {});
+  };
 
   if (loading) {
     return (
@@ -202,6 +267,10 @@ export default function CartPage() {
                 <span>£{subtotal.toFixed(2)}</span>
               </div>
               <div className="flex justify-between border-t border-indigo-100 pt-4 font-semibold text-blue-900">
+                <span>shipping charge:</span>
+                <span>£{shipping.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between border-t border-indigo-100 pt-4 font-semibold text-blue-900">
                 <span>Totals:</span>
                 <span>£{total.toFixed(2)}</span>
               </div>
@@ -209,36 +278,81 @@ export default function CartPage() {
                 <span className="inline-block h-2 w-2 rounded-full bg-green-500" />
                 Shipping & taxes calculated at checkout
               </p>
-              <button className="w-full rounded bg-green-500 py-3 font-semibold text-white transition-colors hover:bg-green-600">
+              {/* <button className="w-full rounded bg-green-500 py-3 font-semibold text-white transition-colors hover:bg-green-600">
                 Proceed To Checkout
-              </button>
+              </button> */}
             </div>
           </div>
 
           <div>
             <h2 className="mb-4 text-center text-lg font-bold text-blue-900 lg:text-left">
-              Calculate Shipping
+              Delivery Details
             </h2>
-            <div className="space-y-5 rounded-lg bg-indigo-50 p-6">
+            <form
+              onSubmit={placeOrder}
+              className="space-y-5 rounded-lg bg-indigo-50 p-6"
+            >
+              <input
+                type="tel"
+                name="phone"
+                placeholder="Phone Number"
+                // value={formData.phone}
+                // onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-700 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
+              />
+
               <input
                 type="text"
-                placeholder="Bangladesh"
-                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-400 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
+                name="address"
+                placeholder="Address"
+                // value={formData.address}
+                // onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-700 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
               />
+
               <input
                 type="text"
-                placeholder="Mirpur Dhaka - 1200"
-                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-400 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
+                name="secondaryAddress"
+                placeholder="Secondary Address (optional)"
+                // value={formData.secondaryAddress}
+                // onChange={(e) => setFormData({ ...formData, secondaryAddress: e.target.value })}
+                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-700 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
               />
-              <input
-                type="text"
-                placeholder="Postal Code"
-                className="w-full border-b border-gray-300 bg-transparent pb-2 text-gray-400 placeholder-gray-400 focus:border-blue-900 focus:outline-none"
-              />
+
+              <div className="space-y-2">
+                <p className="text-sm font-semibold text-blue-900">
+                  Payment Mode
+                </p>
+                <div className="flex gap-6">
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="radio"
+                      name="paymentMode"
+                      value="cash"
+                      // checked={formData.paymentMode === "cash"}
+                      // onChange={(e) => setFormData({ ...formData, paymentMode: e.target.value })}
+                      className="accent-pink-500"
+                    />
+                    <span className="text-gray-700">Cash</span>
+                  </label>
+                  <label className="flex cursor-pointer items-center gap-2">
+                    <input
+                      type="radio"
+                      name="paymentMode"
+                      value="esewa"
+                      // checked={formData.paymentMode === "esewa"}
+                      // onChange={(e) => setFormData({ ...formData, paymentMode: e.target.value })}
+                      className="accent-pink-500"
+                    />
+                    <span className="text-gray-700">eSewa</span>
+                  </label>
+                </div>
+              </div>
+
               <button className="rounded bg-pink-500 px-6 py-2.5 font-semibold text-white transition-colors hover:bg-pink-600">
-                Calculate Shipping
+                Place Order
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>
