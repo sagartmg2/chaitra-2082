@@ -14,6 +14,7 @@ import ProtectedRoute from "./components/layouts/ProtectedRoute";
 import Orders from "./pages/Orders";
 import SellerProducts from "./pages/seller/SellerProducts";
 import AddProduct from "./pages/seller/AddProduct";
+import OrderSuccess from "./pages/OrderSuccess";
 
 function App() {
   let token = localStorage.getItem("token");
@@ -87,11 +88,16 @@ function App() {
               path: "/orders",
               Component: Orders,
             },
+            {
+              path: "/order-success",
+              // path: "/orders-success?data=eyasdfasdfadsfadfs",
+              Component: OrderSuccess,
+            },
           ],
         },
         {
           path: "seller",
-          element: <ProtectedRoute forSeller={true}/>,
+          element: <ProtectedRoute forSeller={true} />,
           children: [
             {
               path: "products",
