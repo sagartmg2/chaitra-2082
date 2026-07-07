@@ -15,6 +15,10 @@ import Orders from "./pages/Orders";
 import SellerProducts from "./pages/seller/SellerProducts";
 import AddProduct from "./pages/seller/AddProduct";
 import OrderSuccess from "./pages/OrderSuccess";
+import AdminDashboard from "./components/layouts/AdminLayout";
+import AdminLayout from "./components/layouts/AdminLayout";
+import Dashboard from "./pages/admin/Dashboard";
+import Categories from "./pages/admin/Categories";
 
 function App() {
   let token = localStorage.getItem("token");
@@ -52,6 +56,26 @@ function App() {
 
   const router = createBrowserRouter([
     {
+      path: "admin",
+      element: <ProtectedRoute forAdmin={true} />,
+      children: [
+        {
+          path: "",
+          element: <AdminLayout />,
+          children: [
+            {
+              path: "dashboard",
+              Component: Dashboard,
+            },
+            {
+              path: "categories",
+              Component: Categories,
+            },
+          ],
+        },
+      ],
+    },
+    {
       path: "",
       // Component: RootLayout,
       element: <RootLayout />,
@@ -59,7 +83,6 @@ function App() {
         { path: "/", Component: Home },
         {
           path: "/login",
-          //  Component: Login\
           element: <Login />,
         },
         { path: "/register", Component: Signup },

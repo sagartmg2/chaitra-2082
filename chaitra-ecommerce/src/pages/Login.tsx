@@ -29,7 +29,12 @@ export default function Login() {
         // react toasting..
         localStorage.setItem("token", res.data.token);
         dispatch(setUser(res.data.user));
-        navigate("/");
+
+        if (res.data.user.isAdmin) {
+          navigate("/admin/dashboard");
+        } else {
+          navigate("/");
+        }
 
         // setUser()
         // setIsLoggedIn(true);
