@@ -19,6 +19,7 @@ import AdminDashboard from "./components/layouts/AdminLayout";
 import AdminLayout from "./components/layouts/AdminLayout";
 import Dashboard from "./pages/admin/Dashboard";
 import Categories from "./pages/admin/Categories";
+import AdminProducts from "./pages/admin/AdminProducts";
 
 function App() {
   let token = localStorage.getItem("token");
@@ -66,6 +67,10 @@ function App() {
             {
               path: "dashboard",
               Component: Dashboard,
+            },
+            {
+              path: "products",
+              Component: AdminProducts,
             },
             {
               path: "categories",
