@@ -3,7 +3,13 @@ import { ChevronDown, Search, ShoppingCart } from "lucide-react";
 import { useState } from "react";
 import type { RootState } from "../../redux/store";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate, useSearchParams } from "react-router";
+import {
+  Link,
+  NavLink,
+  useLocation,
+  useNavigate,
+  useSearchParams,
+} from "react-router";
 import { logout, setUser } from "../../redux/features/userSlice";
 
 function Navbar() {
@@ -56,30 +62,58 @@ function Navbar() {
             Hekto
           </a> */}
         <ul className="flex gap-9 capitalize">
-          <li className="text-secondary">
-            Home <ChevronDown size={16} className="inline-block" />
+          <li className="">
+            <NavLink
+              to={"/"}
+              className={({ isActive, isPending }) =>
+                isPending ? "" : isActive ? "text-secondary" : ""
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            {" "}
-            <Link to={"/products"}>products</Link>
+            <NavLink
+              to={"/products"}
+              className={({ isActive, isPending }) =>
+                isPending ? "" : isActive ? "text-secondary" : ""
+              }
+            >
+              products
+            </NavLink>
+            {/* <Link >products</Link> */}
           </li>
           <li>
-            <Link to={"/carts"}>Carts</Link>
+            <NavLink
+              to={"/carts"}
+              className={({ isActive, isPending }) =>
+                isPending ? "" : isActive ? "text-secondary" : ""
+              }
+            >
+              carts
+            </NavLink>
           </li>
           {reduxUser && (
             <>
               <li>
                 <Link to={"/orders"}>orders</Link>
               </li>
-              <li>
-                <Link to={"/carts"}>Carts</Link>
-              </li>
             </>
           )}
           {reduxUser && reduxUser.isSeller && (
             <>
               <li>
-                <Link to={"/seller/products"}>My Products</Link>
+                {/* <Link to={"/seller/products"}>My Products</Link> */}
+                <NavLink
+                  to={"/seller/products"}
+                  className={({ isActive, isPending }) => {
+                    isActive =
+                      isActive || location.pathname == "/seller/add-product";
+                    return isPending ? "" : isActive ? "text-secondary" : "";
+                  }}
+                >
+                  My products
+                </NavLink>
               </li>
             </>
           )}

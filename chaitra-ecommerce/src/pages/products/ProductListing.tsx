@@ -4,6 +4,8 @@ import { Link, useLocation, useSearchParams } from "react-router";
 import axios from "axios";
 import { Heart, ShoppingCart } from "lucide-react";
 // import { URLSearchParams } from "url";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
 
 function ProductListing() {
   const location = useLocation();
@@ -23,7 +25,7 @@ function ProductListing() {
 
   const [filter, setFilter] = useState({
     perPage: searchParams.get("perPage") || 2,
-    sortBy: searchParams.get("srt") || '',
+    sortBy: searchParams.get("srt") || "",
     categoryIds: [1, 2, 3],
   });
 
@@ -95,9 +97,6 @@ function ProductListing() {
       return urlParms;
     });
   };
-
-  
-
 
   const handleSortChange = (e) => {
     // e.target.value;
@@ -174,23 +173,79 @@ function ProductListing() {
             <p className="font-josefin text-primary text-xl font-bold">
               Categories
             </p>
-            {categories.map((el) => {
-              return (
-                <div>
-                  <input
-                    id={`category-${el.id}`}
-                    type="checkbox"
-                    className="mt-2 mr-2"
-                  />
-                  <label htmlFor={`category-${el.id}`}> {el.title}</label>
-                </div>
-              );
-            })}
+            {isProductsLoading ? (
+              <div className="overflow-hidden pr-12">
+                <Skeleton />
+                <Skeleton className="ml-8" />
+                <Skeleton className="ml-8" />
+                <Skeleton className="ml-8" />
+                <Skeleton />
+                <Skeleton className="ml-8" />
+                <Skeleton className="ml-8" />
+              </div>
+            ) : (
+              <>
+                {categories.map((el) => {
+                  return (
+                    <div>
+                      <div>
+                        <input
+                          id={`category-${el.id}`}
+                          type="checkbox"
+                          className="mt-2 mr-2"
+                        />
+                        <label htmlFor={`category-${el.id}`}> {el.title}</label>
+                      </div>
+
+                      <div className="pl-8">
+                        {el.subCategories.map((sub) => {
+                          return (
+                            <div>
+                              <input
+                                id={`sub-category-${sub.id}`}
+                                type="checkbox"
+                                className="mt-2 mr-2"
+                              />
+                              <label htmlFor={`sub-category-${sub.id}`}>
+                                {sub.title}
+                              </label>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </>
+            )}
           </div>
-          <div className="col-span-8">
+
+          <div className="col-span-8 ">
             {isProductsLoading ? (
               <>
-                <p>loading......</p>
+                {[1, 2, 3, 4, 5, 6].map((_el) => {
+                  return (
+                    <div className="grid w-full grid-cols-8 gap-8 mb-4">
+                      <div className="col-span-2">
+                        <Skeleton height={150} />
+                      </div>
+                      <div className="col-span-6">
+                        <div className="flex h-full flex-col justify-between">
+                          <div>
+                            <Skeleton className="w-1/2!" />
+                            <Skeleton className="w-1/2!" />
+                            <Skeleton />
+                            <Skeleton />
+                          </div>
+                          <div className="flex gap-4">
+                            <Skeleton height={25} width={25} />
+                            <Skeleton height={25} width={25} />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </>
             ) : (
               <>

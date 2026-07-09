@@ -1,3 +1,4 @@
+import { Circle, Dot } from "lucide-react";
 import React from "react";
 import { Link, useLocation } from "react-router";
 
@@ -18,12 +19,15 @@ export default function BreadCrumb({
   return (
     <div className="bg-primary-lighter">
       <div className="container py-[40px] sm:py-[48px] md:py-[56px] lg:py-[64px] xl:py-[80px] 2xl:py-[96px]">
-        <p className="font-josefin text-primary-dark text-4xl font-bold">
+        <p className="font-josefin text-primary-dark text-4xl font-bold capitalize">
           {title || pathnameArr[0]}
         </p>
-        <ul className="mt-2 flex gap-4">
+        <ul className="mt-2 flex gap-4 capitalize">
           <li>
-            <Link to="/">Home </Link>
+            <Link to="/" className="hover:text-secondary">Home </Link>
+          </li>
+          <li>
+            <Dot className="text-secondary inline-block" size={24} />
           </li>
 
           {urls ? (
@@ -41,7 +45,7 @@ export default function BreadCrumb({
               {pathnameArr.map((el, index) => {
                 return (
                   <li key={index}>
-                    <Link to="/">{el}</Link>
+                    <Link className="hover:text-secondary" to="/">{el}</Link>
                   </li>
                 );
               })}
