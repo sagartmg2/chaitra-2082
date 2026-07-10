@@ -11,7 +11,7 @@ function OrderSuccess() {
     let esewaToken = searchParams.get("data");
     axios
       .post(
-        "https://ecom-zb9o.vercel.app/api/orders/order-verify",
+        `${import.meta.env.VITE_API_URL}/orders/order-verify`,
         {
           esewaToken,
         },

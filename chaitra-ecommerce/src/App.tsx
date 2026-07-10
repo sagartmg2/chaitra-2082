@@ -30,7 +30,8 @@ function App() {
   useEffect(() => {
     if (token) {
       axios
-        .get("https://ecom-zb9o.vercel.app/api/auth/me", {
+        // .get("https://ecom-zb9o.vercel.app/api/auth/me", {
+        .get(`${import.meta.env.VITE_API_URL}/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,7 +44,7 @@ function App() {
         });
 
       axios
-        .get("https://ecom-zb9o.vercel.app/api/carts", {
+        .get(`${import.meta.env.VITE_API_URL}/carts`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },

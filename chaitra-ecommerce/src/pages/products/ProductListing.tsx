@@ -30,7 +30,7 @@ function ProductListing() {
   });
 
   useEffect(() => {
-    axios.get("https://ecom-zb9o.vercel.app/api/categories").then((res) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/categories`).then((res) => {
       setCategories(res.data.data);
     });
   }, []);
@@ -41,7 +41,7 @@ function ProductListing() {
     let searchTerm = searchParams.get("q") || "";
     axios
       .get(
-        `https://ecom-zb9o.vercel.app/api/products?q=${searchTerm}&limit=${filter.perPage}&sort=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
+        `${import.meta.env.VITE_API_URL}/products?q=${searchTerm}&limit=${filter.perPage}&sort=${filter.sortBy}&categoryIds=${filter.categoryIds}`,
       )
       .then((res) => {
         setProducts(res.data.data.products);
@@ -55,7 +55,7 @@ function ProductListing() {
     if (token) {
       axios
         .post(
-          "https://ecom-zb9o.vercel.app/api/carts",
+          `${import.meta.env.VITE_API_URL}/carts`,
           {
             productId: id,
           },

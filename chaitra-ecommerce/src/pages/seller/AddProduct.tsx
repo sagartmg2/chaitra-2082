@@ -14,7 +14,7 @@ interface Category {
   subCategories: SubCategory[];
 }
 
-const BASE_URL = "https://ecom-zb9o.vercel.app";
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function AddProduct() {
   const [categories, setCategories] = useState<Category[]>([]);

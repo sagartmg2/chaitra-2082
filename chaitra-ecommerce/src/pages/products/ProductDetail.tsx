@@ -18,7 +18,7 @@ function ProductDetail() {
 
   useEffect(() => {
     axios
-      .get("https://ecom-zb9o.vercel.app/api/products/" + params.slug)
+      .get(`${import.meta.env.VITE_API_URL}/products/` + params.slug)
       .then((res) => {
         console.log("added to cart");
         setProduct(res.data.data);

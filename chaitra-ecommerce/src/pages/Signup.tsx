@@ -51,7 +51,8 @@ export default function Signup() {
     setLoading(true);
 
     axios
-      .post("https://ecom-zb9o.vercel.app/api/signup", data)
+      .post(`${import.meta.env.VITE_API_URL}/signup`, data)
+      // .post("https://ecom-zb9o.vercel.app/api/signup", data)
       .then((res) => {
         console.log("Registration successful", res.data);
         navigate("/login");

@@ -25,7 +25,7 @@ export default function OrdersPage() {
   const fetchOrders = () => {
     setLoading(true);
     axios
-      .get("https://ecom-zb9o.vercel.app/api/orders", {
+      .get(`${import.meta.env.VITE_API_URL}/orders`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },

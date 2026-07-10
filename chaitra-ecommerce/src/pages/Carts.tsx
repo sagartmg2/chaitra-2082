@@ -13,7 +13,7 @@ export default function CartPage() {
 
   const fetchCarts = () => {
     axios
-      .get("https://ecom-zb9o.vercel.app/api/carts", {
+      .get(`${import.meta.env.VITE_API_URL}/carts`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -55,7 +55,7 @@ export default function CartPage() {
 
     axios
       .post(
-        `https://ecom-zb9o.vercel.app/api/carts`,
+        `${import.meta.env.VITE_API_URL}/carts`,
         {
           productId,
           quantity: quantity,
@@ -116,7 +116,7 @@ export default function CartPage() {
 
     axios
       .post(
-        "https://ecom-zb9o.vercel.app/api/orders",
+        `${import.meta.env.VITE_API_URL}/orders`,
         {
           phone: "9840000000",
           paymentMode: "esewa",

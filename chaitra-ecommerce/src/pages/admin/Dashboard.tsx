@@ -40,7 +40,7 @@ export default function Dashboard() {
 
   useEffect(() => {
     axios
-      .get("https://ecom-zb9o.vercel.app/api/dashboard")
+      .get(`${import.meta.env.VITE_API_URL}/dashboard`)
       .then((res) => {
         setDashboardData(res.data);
       })

@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { setUser } from "../redux/features/userSlice";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 type propsType = {
   setIsLoggedIn: (status: boolean) => void;
@@ -21,7 +22,7 @@ export default function Login() {
     e.preventDefault();
     // handle login
     axios
-      .post("https://ecom-zb9o.vercel.app/api/login", {
+      .post(`${import.meta.env.VITE_API_URL}/login`, {
         email: email,
         password: password,
       })
@@ -29,6 +30,7 @@ export default function Login() {
         // react toasting..
         localStorage.setItem("token", res.data.token);
         dispatch(setUser(res.data.user));
+        toast.success("Login successful!");
 
         if (res.data.user.isAdmin) {
           navigate("/admin/dashboard");
@@ -42,7 +44,7 @@ export default function Login() {
       })
       .catch((err) => {
         console.log(err.response.data.msg);
-        alert(err.response.data.msg);
+        toast.error(err.response?.data?.msg || "Login failed! Please try again.");
       });
   };
 
