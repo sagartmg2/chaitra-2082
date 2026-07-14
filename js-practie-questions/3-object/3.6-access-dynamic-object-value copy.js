@@ -32,3 +32,4 @@ console.log(peron.fieldToRetrive); //  what value does this print ??
 console.log(perons.website); // https://www.johndoe.com       // THIS IS NOT WHAT I AM EXPECTING YOU TO WRITE
 
 console.log(peron.fieldToRetrive); // TODO: CHANGE THIS LInE OF CODE           // EXPECTED-OUTPUT:  https://www.johndoe.com
+console.log(peron[fieldToRetrive]); // TODO: CHANGE THIS LInE OF CODE           // EXPECTED-OUTPUT:  https://www.johndoe.com
