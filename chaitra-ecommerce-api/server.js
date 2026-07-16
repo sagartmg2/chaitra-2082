@@ -3,7 +3,12 @@
 
 const express = require("express");
 const bcrypt = require("bcrypt");
+const z = require("zod");
+
+// import * as z from "zod";
+
 const app = express();
+
 const port = 4000;
 const saltRounds = 10;
 
@@ -14,13 +19,15 @@ app.get("/api", (req, res) => {
 });
 
 // lets assume this is our database
-let users = [];
+// let users = [];
 
-// let users = [{
-//     "name":"ram",
-//     "eamil":"ram@gamil.com",
-//     "password": "Q$#ASDFASDFAQ$%@SDFADF"
-// }];
+let users = [
+  {
+    name: "ram",
+    email: "ram@gmail.com",
+    password: "$2b$10$n8aujwhIgKc4lyouM9O.9e37xxxO/J2Z6qdrKLphlkamaAsgI28yy",
+  },
+];
 
 app.post("/api/signup-1", (req, res) => {
   // validations
@@ -91,25 +98,102 @@ app.post("/api/signup", async (req, res) => {
   res.send(users);
 });
 
-app.post("/api/login", (req, res) => {
-  // check if the users exits
-  // check if password match
-  //
-  
-  // let token = jwt.sign(userInfo,SECRETEKET)
+app.post("/api/login", async (req, res) => {
+  try {
+    // let a = b + c;
+    const UserValidationSchema = z.object({
+      email: z.email(),
+      password: z.string().min(8, { error: "min 8 chars required" }),
+      // .regex(
+      //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+      //   { message: "Password does not meet complexity requirements." },
+      // ),
+    });
 
+    const result = UserValidationSchema.safeParse(req.body);
+    console.log(result);
 
-  // res.status(200)
-  // res.status(401).
+    if (!result.success) {
+      const errors = z.flattenError(result.error);
+      /* 
+      {
+        formErrors: [],
+        fieldErrors: {
+          email: [ 'Invalid input: expected string, received undefined' ],
+          password: [ 'Invalid input: expected string, received undefined' ]
+        }
+      }
+      */
+      console.log(errors);
 
-  res.status(200).send({
-    msg:"login success"
-  })
-  
-  // res.status(401).json({
-  //   status: false,
-  //   msg: "invalid credentials",
-  // });
+      // errors.formErrors = undefined;
+      delete errors.formErrors;
+      errors.errors = errors.fieldErrors;
+      delete errors.fieldErrors;
+
+      let err = {};
+      let arr = Object.entries(errors.errors);
+
+      arr.forEach((el) => {
+        err[el[0]] = el[1].join(", ");
+      });
+
+      errors.errors = err;
+      res.status(400).send(errors);
+      return;
+    }
+
+    /* 
+    400.send({
+      errors: {
+        email: 'Invalid input: expected string, received undefined'
+        password:  'Invalid input: expected string, received undefined'
+      }
+    }
+
+    400.send({
+      errors: [
+      {
+        field:email
+        msg: 'Invalid input: expected string, received undefined'
+      },
+      {
+        field: password
+        msg:'Invalid input: expected string, received undefined'
+      }
+      ]
+    }
+    
+    */
+
+    let user = users.find((el) => el.email == req.body.email);
+    //  let user = User.findOne({where:{email:req.body.email}})
+
+    if (user) {
+      let matched = await bcryp.compare(req.body.password, user.password);
+      if (matched) {
+        res.status(200).send({
+          msg: "login success",
+        });
+        return;
+      }
+    }
+
+    res.status(401).json({
+      msg: "invalid credentials",
+    });
+  } catch (err) {
+    console.log(err);
+    console.log(err.name); 
+    console.log("message", err.message);
+    console.log(err.errors);
+    console.log(err.error);
+
+    res.status(500).send({
+      msg: "SERVER error",
+      stack: err.stack,
+    });
+  }
 });
 
 app.listen(port, () => {
