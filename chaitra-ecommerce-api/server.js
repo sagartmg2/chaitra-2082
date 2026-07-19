@@ -4,7 +4,6 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const z = require("zod");
-
 // import * as z from "zod";
 
 const app = express();
@@ -107,7 +106,7 @@ app.post("/api/login", async (req, res) => {
       // .regex(
       //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
       //   { message: "Password does not meet complexity requirements." },
-      // ),
+      // ), // use this regex during signup
     });
 
     const result = UserValidationSchema.safeParse(req.body);
