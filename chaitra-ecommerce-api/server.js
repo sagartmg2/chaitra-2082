@@ -4,7 +4,21 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const z = require("zod");
-// import * as z from "zod";
+const { Sequelize } = require("sequelize");
+const sequelize = new Sequelize(
+  "postgres://postgres:postgres@localhost:5432/postgres",
+);
+
+const checkDbConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log("DB Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
+
+checkDbConnection();
 
 const app = express();
 
@@ -183,7 +197,7 @@ app.post("/api/login", async (req, res) => {
     });
   } catch (err) {
     console.log(err);
-    console.log(err.name); 
+    console.log(err.name);
     console.log("message", err.message);
     console.log(err.errors);
     console.log(err.error);

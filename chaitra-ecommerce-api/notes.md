@@ -31,7 +31,6 @@ postgress/mysql
 
 
   # docker 
-
   - docker image  // similar to github repo
   - docker container // similar to git clone  and npm run dev
   - docker-compose.yml  // similar to package.json // this contains configurations of external services we need to run our project
