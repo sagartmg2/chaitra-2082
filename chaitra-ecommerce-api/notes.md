@@ -18,7 +18,7 @@ postgress/mysql
 -  name   street   age
    ram     balaju    20
 
-- title  price   quantity
+- title: data-type: nullable   price   quantity
   mouse   1000    5
   keyboard 1000   5
 

@@ -4,21 +4,82 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const z = require("zod");
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize(
   "postgres://postgres:postgres@localhost:5432/postgres",
+  {
+    logging: false,
+  },
 );
 
-const checkDbConnection = async () => {
-  try {
-    await sequelize.authenticate();
-    console.log("DB Connection has been established successfully.");
-  } catch (error) {
-    console.error("Unable to connect to the database:", error);
-  }
-};
+const User = sequelize.define(
+  "User",
+  {
+    // id will be automatically created by sequalize.
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   primaryKey: true,
+    // },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isSeller: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    tableName: "users",
+    underscored: "true",
+    timestamps: true,
+  },
+);
 
-checkDbConnection();
+// const Product = sequelize.define(
+//   "Product",
+//   {
+//     title: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     description: {
+//       type: DataTypes.STRING,
+//       allowNull: true,
+//     },
+//     email: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     password: {
+//       type: DataTypes.STRING,
+//       allowNull: false,
+//     },
+//     isSeller: {
+//       type: DataTypes.BOOLEAN,
+//       allowNull: false,
+//       defaultValue: false,
+//     },
+//   },
+//   {
+//     tableName: "products",
+//     underscored: "true",
+//     timestamps: true,
+//   },
+// );
 
 const app = express();
 
@@ -96,11 +157,18 @@ app.post("/api/signup", async (req, res) => {
 
   let hash = await bcrypt.hash(req.body.password, 10);
 
-  users.push({
-    name: req.body.name,
+  let user = await User.create({
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
     password: hash,
   });
+
+  // users.push({
+  //   name: req.body.name,
+  //   email: req.body.email,
+  //   password: hash,
+  // });
 
   // core sql: insert into users (name,email,passwrd) values (req.body.name, .. ...... )
   // core mongodb sytanx: users.insertOne({name:"Ram","email":"ram@gmail.com","pasword":"2#$%@$#%34234"})
@@ -108,7 +176,9 @@ app.post("/api/signup", async (req, res) => {
   // mongoose ORM: User.insertOne({.....})
   // sequalzie ORM : await User.create({name:"Ram","email":"ram@gmail.com","pasword":"2#$%@$#%34234"})
 
-  res.send(users);
+  // res.send(user);
+  // res.status(204).send()
+  res.send({msg:"user created successfully"})
 });
 
 app.post("/api/login", async (req, res) => {
@@ -179,11 +249,18 @@ app.post("/api/login", async (req, res) => {
     
     */
 
-    let user = users.find((el) => el.email == req.body.email);
-    //  let user = User.findOne({where:{email:req.body.email}})
+    // let user = users.find((el) => el.email == req.body.email);
+    let user = await User.findOne({
+      where: {
+        email: req.body.email,
+      },
+    });
+
+    // console.log("user",user);
+    // console.log("user.password",user.password);
 
     if (user) {
-      let matched = await bcryp.compare(req.body.password, user.password);
+      let matched = await bcrypt.compare(req.body.password, user.password);
       if (matched) {
         res.status(200).send({
           msg: "login success",
@@ -208,6 +285,19 @@ app.post("/api/login", async (req, res) => {
     });
   }
 });
+
+const checkDbConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    // await sequelize.sync({ force: true });
+    await sequelize.sync();
+    console.log("DB Connection has been established successfully.");
+  } catch (error) {
+    console.error("Unable to connect to the database:", error);
+  }
+};
+
+checkDbConnection();
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
