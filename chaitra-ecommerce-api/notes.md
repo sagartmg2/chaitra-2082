@@ -40,3 +40,29 @@ postgress/mysql
   - docker compose up  // npm run dev
   - docker compose down  // 
   - docker ps // view the list of currently running docker containers 
+
+
+
+
+
+
+  # features
+  - api to create products using post api
+  - only a logged-in user can create products. 
+    - QUESTION: how to identify if a user is logged in or not. 
+    - https://www.npmjs.com/package/jsonwebtoken
+    - only seller can add products
+
+  - categories
+    - only admin can add categories
+  - get the list of products
+    - filter
+    - pagination
+    - only seller can add products
+    - only that seller who create product can change his/her products
+  - admin should verify the products before they are listed.
+  - add to cart
+  - place order
+    - esewa integration
+  - images upload
+  - 

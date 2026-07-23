@@ -1,8 +1,10 @@
 // create a simple singup api
 // login api
 
+require("dotenv").config();
 const express = require("express");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const z = require("zod");
 const { Sequelize, DataTypes } = require("sequelize");
 const sequelize = new Sequelize(
@@ -49,37 +51,42 @@ const User = sequelize.define(
   },
 );
 
-// const Product = sequelize.define(
-//   "Product",
-//   {
-//     title: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     description: {
-//       type: DataTypes.STRING,
-//       allowNull: true,
-//     },
-//     email: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     password: {
-//       type: DataTypes.STRING,
-//       allowNull: false,
-//     },
-//     isSeller: {
-//       type: DataTypes.BOOLEAN,
-//       allowNull: false,
-//       defaultValue: false,
-//     },
-//   },
-//   {
-//     tableName: "products",
-//     underscored: "true",
-//     timestamps: true,
-//   },
-// );
+const Product = sequelize.define(
+  "Product",
+  {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    price: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    stock: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: User,
+        key: "id",
+      },
+    },
+  },
+  {
+    tableName: "products",
+    underscored: "true",
+    timestamps: true,
+  },
+);
 
 const app = express();
 
@@ -178,7 +185,7 @@ app.post("/api/signup", async (req, res) => {
 
   // res.send(user);
   // res.status(204).send()
-  res.send({msg:"user created successfully"})
+  res.send({ msg: "user created successfully" });
 });
 
 app.post("/api/login", async (req, res) => {
@@ -262,8 +269,23 @@ app.post("/api/login", async (req, res) => {
     if (user) {
       let matched = await bcrypt.compare(req.body.password, user.password);
       if (matched) {
+        // const token = jwt.sign(
+        //   { id: user.id, firstName: user.firstName, email: user.email },
+        //   "OUR-BACKEND-JWT-SECRET-KEY",
+        // );
+        const token = jwt.sign(
+          {
+            id: user.id,
+            firstName: user.firstName,
+            isSeller: user.isSeller,
+            email: user.email,
+          },
+          process.env.JWT_SECRET,
+        );
+
         res.status(200).send({
           msg: "login success",
+          token,
         });
         return;
       }
@@ -286,10 +308,56 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
+app.get("/api/products", async (req, res) => {
+  let products = await Product.findAll();
+  res.send(products);
+});
+
+app.put("/api/products", () => {
+  res.send("products updated");
+});
+
+app.post("/api/products", async (req, res) => {
+  // zoi validation
+
+  // let token = req.headers.authorization.split(" ")[1]
+  let token = req.headers.authorization?.replace("Bearer ", "");
+
+  try {
+    // var decoded = jwt.verify(token, "OUR-BACKEND-JWT-SECRET-KEY");
+    var user = jwt.verify(token, process.env.JWT_SECRET);
+    console.log({ user });
+
+    if (user.isSeller) {
+      let { title, price, stock } = req.body;
+      let product = await Product.create({
+        title: title,
+        price,
+        stock,
+        userId: user.id,
+      });
+
+      res.send(product);
+    } else {
+      res.status(403).send({
+        msg: "forbidden",
+      });
+    }
+
+    return;
+  } catch (err) {
+    res.status(401).send({
+      msg: "invalid credeinations",
+      stack: process.env.APP_ENV === "local" ? err.stack : null,
+    });
+    return;
+  }
+});
+
 const checkDbConnection = async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.sync({ force: true });
+    // await sequelize.sync({ force: true }); // NOTE: this will remove all the datas from database
     await sequelize.sync();
     console.log("DB Connection has been established successfully.");
   } catch (error) {
