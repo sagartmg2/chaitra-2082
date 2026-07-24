@@ -1,0 +1,42 @@
+const { DataTypes } = require("sequelize");
+const sequelize = require("../connections/database");
+
+const User = sequelize.define(
+  "User",
+  {
+    // id will be automatically created by sequalize.
+    // id: {
+    //   type: DataTypes.INTEGER,
+    //   primaryKey: true,
+    // },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    isSeller: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
+    },
+  },
+  {
+    tableName: "users",
+    underscored: "true",
+    timestamps: true,
+  },
+);
+
+module.exports = User
+// export default User
