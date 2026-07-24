@@ -309,12 +309,64 @@ app.post("/api/login", async (req, res) => {
 });
 
 app.get("/api/products", async (req, res) => {
-  let products = await Product.findAll();
+  let products = await Product.findAll(); // select * from products
   res.send(products);
 });
 
-app.put("/api/products", () => {
-  res.send("products updated");
+app.put("/api/products/:id", async (req, res) => {
+  let token = req.headers.authorization?.replace("Bearer ", "");
+
+  try {
+    // var decoded = jwt.verify(token, "OUR-BACKEND-JWT-SECRET-KEY");
+    var user = jwt.verify(token, process.env.JWT_SECRET);
+    console.log({ user });
+    res.send("products updated");
+  } catch (err) {
+    res.status(401).send();
+  }
+
+  return;
+  // zoi validation
+  console.log(req.params.id);
+
+  const product = await Product.update(
+    {
+      title: req.body.title,
+      price: req.body.price,
+    },
+    {
+      where: {
+        id: req.params.id,
+      },
+    },
+  );
+
+  res.send("product update");
+});
+
+app.delete("/api/products/:id", async (req, res) => {
+  // zoi validation
+
+
+  let token = req.headers.authorization?.replace("Bearer ", "");
+
+  try {
+    // var decoded = jwt.verify(token, "OUR-BACKEND-JWT-SECRET-KEY");
+    var user = jwt.verify(token, process.env.JWT_SECRET);
+    console.log({ user });
+    res.send("products deleted");
+  } catch (err) {
+    res.status(401).send();
+  }
+
+  return;
+  const product = await Product.destroy({
+    where: {
+      id: req.params.id,
+    },
+  });
+
+  res.send("product deleted");
 });
 
 app.post("/api/products", async (req, res) => {
