@@ -66,3 +66,11 @@ postgress/mysql
     - esewa integration
   - images upload
   - 
+
+
+
+
+  # middlewares
+  - simply a function which has access to request and response. 
+  - can change/modify request/response 
+  - also has access to next middleware. 

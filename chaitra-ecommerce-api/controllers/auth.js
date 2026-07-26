@@ -1,6 +1,8 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const z = require("zod");
+
 
 const signup = async (req, res) => {
   // validations using zod
