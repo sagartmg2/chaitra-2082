@@ -31,6 +31,14 @@ const Product = sequelize.define(
         key: "id",
       },
     },
+    // categoryId: {
+    //   type: DataTypes.INTEGER,
+    //   allowNull: false,
+    //   references: {
+    //     model: Category,
+    //     key: "id",
+    //   },
+    // },
   },
   {
     tableName: "products",

@@ -1,5 +1,4 @@
 const express = require("express");
-const z = require("zod");
 const { signup, login } = require("../controllers/auth");
 const router = express.Router();
 
@@ -26,7 +25,6 @@ router.post("/api/signup-1", (req, res) => {
 });
 
 router.post("/api/signup",signup );
-
 router.post("/api/login", login );
 
 // export defaut router

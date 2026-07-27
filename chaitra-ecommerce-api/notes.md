@@ -57,6 +57,13 @@ postgress/mysql
     - only admin can add categories
   - get the list of products
     - filter
+      - price
+      - name
+      - category
+      - limit 
+      - sorting
+      - seller wise filter
+
     - pagination
     - only seller can add products
     - only that seller who create product can change his/her products
@@ -73,4 +80,4 @@ postgress/mysql
   # middlewares
   - simply a function which has access to request and response. 
   - can change/modify request/response 
-  - also has access to next middleware. 
+  - also has access to next valid middleware. 
