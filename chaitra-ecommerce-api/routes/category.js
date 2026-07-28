@@ -1,0 +1,17 @@
+const express = require("express");
+const {
+  getCategories,
+  storeCategory,
+  deleteCategory,
+  updateCategory,
+} = require("../controllers/category");
+const checkAuthentication = require("../middlewares/checkAuthentication");
+const checkAdmin = require("../middlewares/checkAdmin");
+const router = express.Router();
+
+router.get("/", getCategories);
+router.post("/", checkAuthentication, checkAdmin, storeCategory);
+router.put("/:id", checkAuthentication, checkAdmin, updateCategory);
+router.delete("/:id", checkAuthentication, checkAdmin, deleteCategory);
+
+module.exports = router;

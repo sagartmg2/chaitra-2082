@@ -3,7 +3,6 @@ const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 const z = require("zod");
 
-
 const signup = async (req, res) => {
   // validations using zod
   // receive data from req.body
@@ -150,6 +149,7 @@ const login = async (req, res) => {
             id: user.id,
             firstName: user.firstName,
             isSeller: user.isSeller,
+            isAdmin: user.isAdmin,
             email: user.email,
           },
           process.env.JWT_SECRET,

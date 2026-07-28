@@ -1,5 +1,6 @@
 // model associations
 
+const User = require("./User");
 const Cart = require("./Cart");
 const Product = require("./Product");
 
@@ -13,7 +14,10 @@ Product.hasMany(Cart, {
   as: "Carts",
 });
 
-
+User.hasMany(Product, {
+  foreignKey: "userId",
+  as: "products",
+});
 
 // User.hasMany(Product)
 // Product.belongsTo(User)

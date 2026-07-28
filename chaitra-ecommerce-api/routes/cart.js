@@ -5,12 +5,12 @@ const {
   deleteCart,
   updateCart,
 } = require("../controllers/cart");
-const checkAuthentication = require("../middlewares/checkAuthentication");
+const checkAuthentication = require("../middlewares/checkAdmin");
 const router = express.Router();
 
-router.get("/api/carts", checkAuthentication, getCarts);
-router.post("/api/carts", checkAuthentication, storeCart);
-router.put("/api/carts/:id", checkAuthentication, updateCart);
-router.delete("/api/carts/:id", checkAuthentication, deleteCart);
+router.get("/", checkAuthentication, getCarts);
+router.post("/", checkAuthentication, storeCart);
+router.put("/:id", checkAuthentication, updateCart);
+router.delete("/:id", checkAuthentication, deleteCart);
 
 module.exports = router;

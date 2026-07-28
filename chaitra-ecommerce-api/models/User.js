@@ -30,6 +30,15 @@ const User = sequelize.define(
       allowNull: false,
       defaultValue: false,
     },
+    isAdmin: {
+      type: DataTypes.BOOLEAN,
+      allowNull: true,
+      defaultValue: false,
+    },
+    // testField: {
+    //   allowNull: false,
+    //   type: DataTypes.STRING,
+    // },
     // role: {
     //   type: DataTypes.STRING,
     //   defaultValue: "buyer",
