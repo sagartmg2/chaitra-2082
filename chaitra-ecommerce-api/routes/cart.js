@@ -5,7 +5,7 @@ const {
   deleteCart,
   updateCart,
 } = require("../controllers/cart");
-const checkAuthentication = require("../middlewares/checkAdmin");
+const checkAuthentication = require("../middlewares/checkAuthentication");
 const router = express.Router();
 
 router.get("/", checkAuthentication, getCarts);

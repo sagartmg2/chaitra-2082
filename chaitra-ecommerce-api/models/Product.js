@@ -1,6 +1,7 @@
 const { DataTypes } = require("sequelize");
 const sequelize = require("../connections/database");
 const User = require("./User");
+const Category = require("./Category");
 
 const Product = sequelize.define(
   "Product",
@@ -31,14 +32,14 @@ const Product = sequelize.define(
         key: "id",
       },
     },
-    // categoryId: {
-    //   type: DataTypes.INTEGER,
-    //   allowNull: false,
-    //   references: {
-    //     model: Category,
-    //     key: "id",
-    //   },
-    // },
+    categoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Category,
+        key: "id",
+      },
+    },
   },
   {
     tableName: "products",

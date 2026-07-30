@@ -1,14 +1,14 @@
 require("dotenv").config();
 const express = require("express");
-const sequelize = require("./connections/database");
 require("./models/index");
+const sequelize = require("./connections/database");
 const app = express();
 const port = 4000;
 const authRoutes = require("./routes/auth");
 const productRoutes = require("./routes/product");
 const cartRoutes = require("./routes/cart");
 const categoryRoutes = require("./routes/category");
-
+const OrderRoutes = require("./routes/order");
 
 // http://api.facebook.com/uploads/mouse.png
 // cloudinary
@@ -32,6 +32,7 @@ app.use(authRoutes);
 app.use(productRoutes);
 app.use("/api/carts", cartRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/orders", OrderRoutes);
 
 app.get("/api", middleware2, middleware1, (req, res) => {
   res.send("welcome to chaitra ecommerce apiiii !");

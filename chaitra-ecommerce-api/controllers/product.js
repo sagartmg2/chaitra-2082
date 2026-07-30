@@ -1,25 +1,39 @@
 const z = require("zod");
 const Product = require("../models/Product");
+const Category = require("../models/Category");
 
 const getProducts = async (req, res) => {
-  let products = await Product.findAll(); // select * from products
+  let products = await Product.findAll({
+    include:{
+      model:Category,
+      as: "category"
+    }
+  }); // select * from products
   res.send(products);
 };
 
 const storeProduct = async (req, res) => {
-  if (req.user.isSeller) {
-    let { title, price, stock } = req.body;
-    let product = await Product.create({
-      title: title,
-      price,
-      stock,
-      userId: req.user.id,
-    });
+  try {
+    if (req.user.isSeller) {
+      let { title, price, stock, categoryId } = req.body;
+      let product = await Product.create({
+        title: title,
+        price,
+        stock,
+        userId: req.user.id,
+        categoryId,
+      });
 
-    res.send(product);
-  } else {
-    res.status(403).send({
-      msg: "forbidden",
+      res.send(product);
+    } else {
+      res.status(403).send({
+        msg: "forbidden",
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      msg: err.message,
+      error: err,
     });
   }
 };
