@@ -4,6 +4,8 @@ const User = require("./User");
 const Cart = require("./Cart");
 const Product = require("./Product");
 const Category = require("./Category");
+const SubOrder = require("./SubOrder");
+const OrderItem = require("./OrderItem");
 
 Cart.belongsTo(Product, {
   foreignKey: "productId",

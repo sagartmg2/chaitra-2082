@@ -35,6 +35,15 @@ const User = sequelize.define(
       allowNull: true,
       defaultValue: false,
     },
+    shippingCharge: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
+    storeName: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     // testField: {
     //   allowNull: false,
     //   type: DataTypes.STRING,
