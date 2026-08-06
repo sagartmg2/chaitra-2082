@@ -88,7 +88,6 @@ const storeOrder = async (req, res) => {
           {
             subOrderId: subOrder.id,
             productId: product.id,
-            // productId: null,
             quantity: productQty,
             price: product.price,
             productName: product.title,

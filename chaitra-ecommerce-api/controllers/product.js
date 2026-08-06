@@ -1,14 +1,73 @@
 const z = require("zod");
 const Product = require("../models/Product");
 const Category = require("../models/Category");
+const { Op, Sequelize } = require("sequelize");
 
 const getProducts = async (req, res) => {
-  let products = await Product.findAll({
-    include:{
-      model:Category,
-      as: "category"
+  let limit = 2;
+  let page = 1;
+  let searchTerm = "";
+  let sortBy = ["createdAt", "DESC"];
+  let categoryIds = [];
+
+  if (req.query.categoryIds) {
+    // 1,3
+    categoryIds = req.query.categoryIds.split(",");
+  }
+
+  // use switch instead
+  if (req.query.sortBy) {
+    if (req.query.sortBy == "priceASC") {
+      sortBy = ["price", "ASC"];
+    } else if (req.query.sortBy == "priceDESC") {
+      sortBy = ["price", "DESC"];
+    } else if (req.query.sortBy == "latest") {
+      sortBy = ["createdAt", "DESC"];
+    } else if (req.query.sortBy == "oldest") {
+      sortBy = ["createdAt", "ASC"];
+    } else if (req.query.sortBy == "titleA-Z") {
+      sortBy = [Sequelize.fn("LOWER", Sequelize.col("title")), "ASC"];
+    } else if (req.query.sortBy == "titleZ-A") {
+      sortBy = [Sequelize.fn("LOWER", Sequelize.col("title")), "DESC"];
     }
-  }); // select * from products
+  }
+
+  if (req.query.limit) {
+    limit = req.query.limit;
+  }
+
+  if (req.query.page) {
+    page = req.query.page;
+  }
+
+  if (req.query.q) {
+    searchTerm = req.query.q;
+  }
+
+  let products = await Product.findAndCountAll({
+    where: {
+      title: {
+        [Op.iLike]: `%${searchTerm}%`,
+      },
+    },
+    include: {
+      model: Category,
+      as: "category",
+      where:{
+        id:{
+          [Op.in]:categoryIds
+        }
+      }
+    },
+    limit: limit,
+    offset: (page - 1) * limit,
+    // order: [
+    //   ["createdAt", "DESC"],
+    //   // ["price", "ASC"],
+    //   // ["title", "ASC"],
+    // ],
+    order: [sortBy],
+  });
   res.send(products);
 };
 
