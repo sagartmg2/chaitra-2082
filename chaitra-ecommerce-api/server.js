@@ -16,6 +16,8 @@ const OrderRoutes = require("./routes/order");
 app.use(express.json()); // global middleware : applicable to all api routes |  to read data from req.body
 // app.use(checkAuthentication) // global middelware
 
+app.use("/uploads", express.static("uploads"));
+
 const middleware1 = (req, res, next) => {
   console.log("middelware1");
   next(); //netx valid middeleware in line
@@ -42,7 +44,7 @@ const checkDbConnection = async () => {
   try {
     await sequelize.authenticate();
     // await sequelize.sync({ force: true }); // NOTE: this will remove all the datas from database
-    await sequelize.sync({alter:true});
+    await sequelize.sync({ alter: true });
     console.log("DB Connection has been established successfully.");
   } catch (error) {
     console.error("Unable to connect to the database:", error);

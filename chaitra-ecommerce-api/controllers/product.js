@@ -1,7 +1,16 @@
 const z = require("zod");
+const cloudinary = require("cloudinary").v2;
+
 const Product = require("../models/Product");
 const Category = require("../models/Category");
 const { Op, Sequelize } = require("sequelize");
+const ProductImage = require("../models/ProductImage");
+
+cloudinary.config({
+  cloud_name: "dtv8dtpkm",
+  api_key: "214576936119774",
+  api_secret: "Bybox_PKl5TAvKLSrDbGHLXEI3E",
+});
 
 const getProducts = async (req, res) => {
   let limit = 2;
@@ -50,15 +59,21 @@ const getProducts = async (req, res) => {
         [Op.iLike]: `%${searchTerm}%`,
       },
     },
-    include: {
-      model: Category,
-      as: "category",
-      where:{
-        id:{
-          [Op.in]:categoryIds
-        }
-      }
-    },
+    include: [
+      {
+        model: Category,
+        as: "category",
+        where: {
+          id: {
+            [Op.in]: categoryIds,
+          },
+        },
+      },
+      {
+        model: ProductImage,
+        as: "images",
+      },
+    ],
     limit: limit,
     offset: (page - 1) * limit,
     // order: [
@@ -82,6 +97,37 @@ const storeProduct = async (req, res) => {
         userId: req.user.id,
         categoryId,
       });
+
+      console.log(req.files);
+
+      // req.files.forEach((file) => {
+      //   ProductImage.create({
+      //     productId: product.id,
+      //     path: file.path,
+      //   });
+      // });
+
+      req.files?.forEach(el => {
+            let byteArrayBuffer = el.buffer
+            new Promise((resolve, reject) => {
+                cloudinary.uploader.upload_stream((error, uploadResult) => {
+                    if (error) {
+                        return reject(error);
+                    }
+                    return resolve(uploadResult);
+                }).end(byteArrayBuffer);
+
+            }).then((uploadResult) => {
+                console.log(uploadResult);
+                ProductImage.create({
+                    path: uploadResult.secure_url,
+                    productId: product.getDataValue("id")
+                })
+            }).catch((error) => {
+                console.error(error);
+            });
+        })
+
 
       res.send(product);
     } else {

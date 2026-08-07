@@ -6,6 +6,7 @@ const Product = require("./Product");
 const Category = require("./Category");
 const SubOrder = require("./SubOrder");
 const OrderItem = require("./OrderItem");
+const ProductImage = require("./ProductImage");
 
 Cart.belongsTo(Product, {
   foreignKey: "productId",
@@ -15,6 +16,11 @@ Cart.belongsTo(Product, {
 Product.hasMany(Cart, {
   foreignKey: "productId",
   as: "Carts",
+});
+
+Product.hasMany(ProductImage, {
+  foreignKey: "productId",
+  as: "images",
 });
 
 User.hasMany(Product, {
