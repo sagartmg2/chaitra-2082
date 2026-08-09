@@ -1,29 +1,33 @@
-require("dotenv").config();
-const express = require("express");
+// require("dotenv").config();
+import 'dotenv/config'
+// const express = require("express");
+import express, { Request,Response,NextFunction } from "express"
+
+
+
 require("./models/index");
 const sequelize = require("./connections/database");
 const app = express();
 const port = 4000;
-const authRoutes = require("./routes/auth");
+// const authRoutes = require("./routes/auth");
+import authRoutes from "./routes/auth"
+import cartRoutes from "./routes/cart"
+
 const productRoutes = require("./routes/product");
-const cartRoutes = require("./routes/cart");
 const categoryRoutes = require("./routes/category");
 const OrderRoutes = require("./routes/order");
-
-// http://api.facebook.com/uploads/mouse.png
-// cloudinary
 
 app.use(express.json()); // global middleware : applicable to all api routes |  to read data from req.body
 // app.use(checkAuthentication) // global middelware
 
 app.use("/uploads", express.static("uploads"));
 
-const middleware1 = (req, res, next) => {
+const middleware1 = (_req: Request, _res:Response, next:NextFunction) => {
   console.log("middelware1");
   next(); //netx valid middeleware in line
 };
 
-const middleware2 = (req, res, next) => {
+const middleware2 = (req: Request, res:Response, next:NextFunction) => {
   console.log("middelware2");
   next();
 };

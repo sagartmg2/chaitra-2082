@@ -8,7 +8,9 @@ const {
   deleteProduct,
   updateProduct,
 } = require("../controllers/product");
-const checkAuthentication = require("../middlewares/checkAuthentication");
+
+import checkAuthentication from "../middlewares/checkAuthentication"
+
 const Product = require("../models/Product");
 const checkAdmin = require("../middlewares/checkAdmin");
 const router = express.Router();

@@ -5,7 +5,9 @@ const {
   deleteCategory,
   updateCategory,
 } = require("../controllers/category");
-const checkAuthentication = require("../middlewares/checkAuthentication");
+// const checkAuthentication = require("../middlewares/checkAuthentication");
+import checkAuthentication from "../middlewares/checkAuthentication"
+
 const checkAdmin = require("../middlewares/checkAdmin");
 const router = express.Router();
 

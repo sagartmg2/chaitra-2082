@@ -6,7 +6,8 @@ const {
   updateOrder,
 } = require("../controllers/order");
 
-const checkAuthentication = require("../middlewares/checkAuthentication");
+import checkAuthentication from "../middlewares/checkAuthentication"
+
 const Order = require("../models/Order");
 const { default: axios } = require("axios");
 const OrderRouter = express.Router();
