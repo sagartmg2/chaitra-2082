@@ -1,6 +1,8 @@
+import { Request, Response, NextFunction } from "express";
+
 const Category = require("../models/Category");
 
-const getCategories = async (req, res) => {
+const getCategories = async (req: Request, res: Response) => {
   let categories = await Category.findAll({
     where: {
       parentCategoryId: null,
@@ -8,7 +10,7 @@ const getCategories = async (req, res) => {
     include: {
       model: Category,
       as: "subCategories",
-      attributes:['id','name']
+      attributes: ['id', 'name']
     },
   }); // select * from categories
   res.send({
@@ -16,7 +18,7 @@ const getCategories = async (req, res) => {
   });
 };
 
-const storeCategory = async (req, res) => {
+const storeCategory = async (req: Request, res: Response) => {
   try {
     let category = await Category.create({
       name: req.body.name,
@@ -25,15 +27,20 @@ const storeCategory = async (req, res) => {
 
     res.send(category);
   } catch (err) {
+
+    let msg = ""
+    if (err instanceof Error) {
+      msg = err.message
+    }
+
     res.status(500).send({
       msg: "SERVER error",
-      error: err.error,
-      msg: err.message,
+      errorMsg: msg
     });
   }
 };
 
-const updateCategory = async (req, res) => {
+const updateCategory = async (req: Request, res: Response) => {
   res.send("categories updated");
   return;
   // zoi validation
@@ -54,7 +61,7 @@ const updateCategory = async (req, res) => {
   res.send("cart update");
 };
 
-const deleteCategory = async (req, res) => {
+const deleteCategory = async (req: Request, res: Response) => {
   res.send("categories deleted");
   return;
   const cart = await Category.destroy({

@@ -1,9 +1,13 @@
+import { Request, Response, NextFunction } from "express";
+
 const z = require("zod");
 const cloudinary = require("cloudinary").v2;
+const { Op, Sequelize } = require("sequelize");
+
+
 
 const Product = require("../models/Product");
 const Category = require("../models/Category");
-const { Op, Sequelize } = require("sequelize");
 const ProductImage = require("../models/ProductImage");
 
 cloudinary.config({
@@ -12,16 +16,16 @@ cloudinary.config({
   api_secret: "Bybox_PKl5TAvKLSrDbGHLXEI3E",
 });
 
-const getProducts = async (req, res) => {
+const getProducts = async (req: Request, res: Response) => {
   let limit = 2;
   let page = 1;
   let searchTerm = "";
   let sortBy = ["createdAt", "DESC"];
-  let categoryIds = [];
+  let categoryIds: string[] = [];
 
   if (req.query.categoryIds) {
     // 1,3
-    categoryIds = req.query.categoryIds.split(",");
+    categoryIds = (req.query.categoryIds as string).split(",");
   }
 
   // use switch instead
@@ -42,15 +46,15 @@ const getProducts = async (req, res) => {
   }
 
   if (req.query.limit) {
-    limit = req.query.limit;
+    limit = parseInt(req.query.limit as string);
   }
 
   if (req.query.page) {
-    page = req.query.page;
+    page = parseInt(req.query.page as string);
   }
 
   if (req.query.q) {
-    searchTerm = req.query.q;
+    searchTerm = req.query.q as string;
   }
 
   let products = await Product.findAndCountAll({
@@ -86,7 +90,10 @@ const getProducts = async (req, res) => {
   res.send(products);
 };
 
-const storeProduct = async (req, res) => {
+const storeProduct = async (req: Request, res: Response) => {
+
+
+
   try {
     if (req.user.isSeller) {
       let { title, price, stock, categoryId } = req.body;
@@ -99,7 +106,7 @@ const storeProduct = async (req, res) => {
       });
 
       console.log(req.files);
-
+      
       // req.files.forEach((file) => {
       //   ProductImage.create({
       //     productId: product.id,
@@ -107,26 +114,27 @@ const storeProduct = async (req, res) => {
       //   });
       // });
 
+      // @ts-ignore
       req.files?.forEach(el => {
-            let byteArrayBuffer = el.buffer
-            new Promise((resolve, reject) => {
-                cloudinary.uploader.upload_stream((error, uploadResult) => {
-                    if (error) {
-                        return reject(error);
-                    }
-                    return resolve(uploadResult);
-                }).end(byteArrayBuffer);
+        let byteArrayBuffer = el.buffer
+        new Promise((resolve, reject) => {
+          cloudinary.uploader.upload_stream((error: any, uploadResult: any) => {
+            if (error) {
+              return reject(error);
+            }
+            return resolve(uploadResult);
+          }).end(byteArrayBuffer);
 
-            }).then((uploadResult) => {
-                console.log(uploadResult);
-                ProductImage.create({
-                    path: uploadResult.secure_url,
-                    productId: product.getDataValue("id")
-                })
-            }).catch((error) => {
-                console.error(error);
-            });
-        })
+        }).then((uploadResult: any) => {
+          console.log(uploadResult);
+          ProductImage.create({
+            path: uploadResult.secure_url,
+            productId: product.getDataValue("id")
+          })
+        }).catch((error) => {
+          console.error(error);
+        });
+      })
 
 
       res.send(product);
@@ -137,13 +145,12 @@ const storeProduct = async (req, res) => {
     }
   } catch (err) {
     res.status(500).send({
-      msg: err.message,
       error: err,
     });
   }
 };
 
-const updateProduct = async (req, res) => {
+const updateProduct = async (req: Request, res: Response) => {
   res.send("products updated");
   return;
   // zoi validation
@@ -164,7 +171,7 @@ const updateProduct = async (req, res) => {
   res.send("product update");
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async (req: Request, res: Response) => {
   console.log("porocuts deleting....");
   res.send("products deleted");
   return;

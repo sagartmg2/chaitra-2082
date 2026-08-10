@@ -1,8 +1,10 @@
-const z = require("zod");
+import { Request,Response,NextFunction } from "express";
+
+
 const Cart = require("../models/Cart");
 const Product = require("../models/Product");
 
-const getCarts = async (req, res) => {
+const getCarts = async (req: Request, res:  Response) => {
   let carts = await Cart.findAll({
     where: {
       userId: req.user.id,
@@ -17,7 +19,7 @@ const getCarts = async (req, res) => {
   });
 };
 
-const storeCart = async (req, res) => {
+const storeCart = async (req: Request, res:  Response) => {
   try {
     let cart = await Cart.create({
       userId: req.user.id,
@@ -29,13 +31,11 @@ const storeCart = async (req, res) => {
   } catch (err) {
     res.status(500).send({
       msg: "SERVER error",
-      error: err.error,
-      msg: err.message,
     });
   }
 };
 
-const updateCart = async (req, res) => {
+const updateCart = async (req: Request, res:  Response) => {
   res.send("carts updated");
   return;
   // zoi validation
@@ -56,7 +56,7 @@ const updateCart = async (req, res) => {
   res.send("cart update");
 };
 
-const deleteCart = async (req, res) => {
+const deleteCart = async (req: Request, res:  Response) => {
   console.log("porocuts deleting....");
   res.send("carts deleted");
   return;

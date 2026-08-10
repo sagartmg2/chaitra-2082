@@ -1,6 +1,7 @@
-const express = require("express");
-const multer  = require('multer')
-const path = require("path")
+import { Request } from "express";
+import express from "express"
+import multer from "multer"
+import path from "path"
 
 const {
   getProducts,
@@ -9,10 +10,11 @@ const {
   updateProduct,
 } = require("../controllers/product");
 
-import checkAuthentication from "../middlewares/checkAuthentication"
+import checkAuthentication from "../middlewares/checkAuthentication";
+// const checkAdmin = require("../middlewares/checkAdmin");
+import checkAdmin from "../middlewares/checkAdmin";
 
 const Product = require("../models/Product");
-const checkAdmin = require("../middlewares/checkAdmin");
 const router = express.Router();
 
 // const storage = multer.diskStorage({
@@ -26,13 +28,17 @@ const router = express.Router();
 //   }
 // })
 
-const storage = multer.memoryStorage()
-const upload = multer({ storage: storage })
-
-
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 router.get("/api/products", getProducts);
-router.post("/api/products", checkAuthentication, upload.array('photos', 12), storeProduct);
+
+router.post(
+  "/api/products",
+  checkAuthentication,
+  upload.array("photos", 12),
+  storeProduct,
+);
 // route level middleware
 router.put("/api/products/:id", checkAuthentication, updateProduct);
 router.delete("/api/products/:id", checkAuthentication, deleteProduct);
@@ -41,7 +47,7 @@ router.patch(
   "/api/products/verify/:id",
   checkAuthentication,
   checkAdmin,
-  () => {
+  (req:Request) => {
     Product.update(
       {
         isVerified: true,
@@ -55,4 +61,5 @@ router.patch(
   },
 );
 
-module.exports = router;
+// module.exports = router;
+export default router;

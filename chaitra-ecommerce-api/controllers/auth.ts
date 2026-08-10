@@ -1,14 +1,16 @@
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const User = require("../models/User");
-const z = require("zod");
+import { Request, Response, NextFunction } from "express";
+import bcrypt from "bcrypt"
+import jwt from "jsonwebtoken"
+import z from "zod"
 
-const signup = async (req, res) => {
+const User = require("../models/User");
+
+export const signup = async (req: Request, res: Response) => {
   // validations using zod
   // receive data from req.body
   // using bcrypt has the password
   // store in database
-
+  ``
   if (!req.body.password) {
     res.status(400).send({
       msg: "Validation Error",
@@ -59,7 +61,7 @@ const signup = async (req, res) => {
   res.send({ msg: "user created successfully" });
 };
 
-const login = async (req, res) => {
+export const login = async (req: Request, res: Response) => {
   try {
     // let a = b + c;
     const UserValidationSchema = z.object({
@@ -88,19 +90,23 @@ const login = async (req, res) => {
       console.log(errors);
 
       // errors.formErrors = undefined;
-      delete errors.formErrors;
-      errors.errors = errors.fieldErrors;
-      delete errors.fieldErrors;
+      // delete errors.formErrors;
+      // errors.errors = errors.fieldErrors;
+      // delete errors.fieldErrors;
 
-      let err = {};
-      let arr = Object.entries(errors.errors);
+      let validationErrors = {
+        errors: errors.fieldErrors
+      }
+
+      let err: Record<string, string> = {};
+      let arr = Object.entries(validationErrors.errors);
 
       arr.forEach((el) => {
         err[el[0]] = el[1].join(", ");
       });
 
-      errors.errors = err;
-      res.status(400).send(errors);
+      validationErrors.errors = err;
+      res.status(400).send(validationErrors);
       return;
     }
 
@@ -152,7 +158,7 @@ const login = async (req, res) => {
             isAdmin: user.isAdmin,
             email: user.email,
           },
-          process.env.JWT_SECRET,
+          process.env.JWT_SECRET || "",
         );
 
         res.status(200).send({
@@ -167,15 +173,15 @@ const login = async (req, res) => {
       msg: "invalid credentials",
     });
   } catch (err) {
-    console.log(err);
-    console.log(err.name);
-    console.log("message", err.message);
-    console.log(err.errors);
-    console.log(err.error);
+
+    let stack = ""
+    if (err instanceof Error) {
+      stack = err.stack || ""
+    }
 
     res.status(500).send({
       msg: "SERVER error",
-      stack: err.stack,
+      stack: stack,
     });
   }
 };
@@ -184,7 +190,10 @@ const login = async (req, res) => {
 // module.exports.login = login;
 // module.exports.signup = signup;
 
-module.exports = {
-  login,
-  signup: signup,
-};
+// module.exports = {
+//   login,
+//   signup: signup,
+// };
+
+// exprot const login = 
+// export const signup = 

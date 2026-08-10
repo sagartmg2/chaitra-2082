@@ -9,13 +9,16 @@ require("./models/index");
 const sequelize = require("./connections/database");
 const app = express();
 const port = 4000;
+
+
 // const authRoutes = require("./routes/auth");
 import authRoutes from "./routes/auth"
 import cartRoutes from "./routes/cart"
+import categoryRoutes from "./routes/category"
+import productRoutes from "./routes/product"
+import OrderRoutes from "./routes/order"
 
-const productRoutes = require("./routes/product");
-const categoryRoutes = require("./routes/category");
-const OrderRoutes = require("./routes/order");
+
 
 app.use(express.json()); // global middleware : applicable to all api routes |  to read data from req.body
 // app.use(checkAuthentication) // global middelware
