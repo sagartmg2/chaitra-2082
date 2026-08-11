@@ -10,7 +10,7 @@ import express, { Request, Response, NextFunction } from "express";
 const app = express();
 const port = 4000;
 
-app.get("/api", (req, res) => {
+app.get("/api", (_req, res) => {
   res.send("welcome to chaitra ecommerce apiiii !");
 });
 
@@ -67,9 +67,11 @@ const checkDbConnection = async () => {
 
 */
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
-});
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`);
+  });
+}
 
 // checkDbConnection();
 
