@@ -1,12 +1,18 @@
 // model associations
 
-const User = require("./User");
-const Cart = require("./Cart");
-const Product = require("./Product");
-const Category = require("./Category");
-const SubOrder = require("./SubOrder");
-const OrderItem = require("./OrderItem");
-const ProductImage = require("./ProductImage");
+import Cart from "./Cart";
+import User from "./User";
+
+// const User = require("./User");
+// const Cart = require("./Cart");
+import Product from "./Product";
+import Category from "./Category";
+import ProductImage from "./ProductImage";
+
+
+import SubOrder from "./SubOrder";
+import OrderItem from "./OrderItem";
+
 
 Cart.belongsTo(Product, {
   foreignKey: "productId",

@@ -2,15 +2,14 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import z from "zod"
-
-const User = require("../models/User");
+import User from "../models/User";
 
 export const signup = async (req: Request, res: Response) => {
   // validations using zod
   // receive data from req.body
   // using bcrypt has the password
   // store in database
-  ``
+  
   if (!req.body.password) {
     res.status(400).send({
       msg: "Validation Error",
@@ -144,7 +143,8 @@ export const login = async (req: Request, res: Response) => {
     // console.log("user.password",user.password);
 
     if (user) {
-      let matched = await bcrypt.compare(req.body.password, user.password);
+      // let matched = await bcrypt.compare(req.body.password, user.password);
+      let matched = await bcrypt.compare(req.body.password, user.getDataValue("password"));
       if (matched) {
         // const token = jwt.sign(
         //   { id: user.id, firstName: user.firstName, email: user.email },
@@ -152,11 +152,11 @@ export const login = async (req: Request, res: Response) => {
         // );
         const token = jwt.sign(
           {
-            id: user.id,
-            firstName: user.firstName,
-            isSeller: user.isSeller,
-            isAdmin: user.isAdmin,
-            email: user.email,
+            id: user.getDataValue("id"),
+            firstName: user.getDataValue("firstName"),
+            isSeller: user.getDataValue("isSeller"),
+            isAdmin: user.getDataValue("isAdmin"),
+            email: user.getDataValue("email"),
           },
           process.env.JWT_SECRET || "",
         );

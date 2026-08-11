@@ -1,10 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
-const User = require("./User");
-const Order = require("./Order");
-const SubOrder = require("./SubOrder");
-const Product = require("./Product");
+import { DataTypes } from "sequelize";
+import SubOrder from "./SubOrder";
+import Product from "./Product";
 
+import sequelize from "../connections/database";
 const OrderItem = sequelize.define(
   "OrderItem",
   {
@@ -39,9 +37,9 @@ const OrderItem = sequelize.define(
   },
   {
     tableName: "order_items",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
 
-module.exports = OrderItem;
+export default OrderItem;

@@ -1,14 +1,13 @@
 import express from "express"
 
-const {
+import {
   getCategories,
   storeCategory,
   deleteCategory,
   updateCategory,
-} = require("../controllers/category");
+} from "../controllers/category";
 
 
-// const checkAuthentication = require("../middlewares/checkAuthentication");
 import checkAuthentication from "../middlewares/checkAuthentication"
 import checkAdmin from "../middlewares/checkAdmin";
 

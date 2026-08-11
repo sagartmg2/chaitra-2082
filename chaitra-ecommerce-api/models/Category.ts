@@ -1,5 +1,6 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
+import { DataTypes } from "sequelize";
+
+import sequelize from "../connections/database";
 
 const Category = sequelize.define(
   "Category",
@@ -16,7 +17,7 @@ const Category = sequelize.define(
   },
   {
     tableName: "categories",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
@@ -26,4 +27,4 @@ Category.hasMany(Category, {
   as: "subCategories",
 });
 
-module.exports = Category;
+export default Category;

@@ -28,7 +28,7 @@ let course1: Course = {
     startDate: "july 2026"
 }
 
-course1.endDate: "aug 2026"
+// course1.endDate: "aug 2026"
 
 delete course1.startDate
 

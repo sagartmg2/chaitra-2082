@@ -1,14 +1,14 @@
 import { Request, Response, NextFunction } from "express";
 
-const z = require("zod");
-const cloudinary = require("cloudinary").v2;
-const { Op, Sequelize } = require("sequelize");
+import z from "zod";
+import { v2 as cloudinary } from "cloudinary";
+import { Op, Sequelize, OrderItem } from "sequelize";
 
 
 
-const Product = require("../models/Product");
-const Category = require("../models/Category");
-const ProductImage = require("../models/ProductImage");
+import Product from "../models/Product.js";
+import Category from "../models/Category";
+import ProductImage from "../models/ProductImage.js";
 
 cloudinary.config({
   cloud_name: "dtv8dtpkm",
@@ -20,7 +20,7 @@ const getProducts = async (req: Request, res: Response) => {
   let limit = 2;
   let page = 1;
   let searchTerm = "";
-  let sortBy = ["createdAt", "DESC"];
+  let sortBy: OrderItem = ["createdAt", "DESC"];
   let categoryIds: string[] = [];
 
   if (req.query.categoryIds) {
@@ -39,9 +39,9 @@ const getProducts = async (req: Request, res: Response) => {
     } else if (req.query.sortBy == "oldest") {
       sortBy = ["createdAt", "ASC"];
     } else if (req.query.sortBy == "titleA-Z") {
-      sortBy = [Sequelize.fn("LOWER", Sequelize.col("title")), "ASC"];
+      sortBy = [Sequelize.fn("lower", Sequelize.col("title")), "ASC"];
     } else if (req.query.sortBy == "titleZ-A") {
-      sortBy = [Sequelize.fn("LOWER", Sequelize.col("title")), "DESC"];
+      sortBy = [Sequelize.fn("lower", Sequelize.col("title")), "DESC"];
     }
   }
 
@@ -185,7 +185,7 @@ const deleteProduct = async (req: Request, res: Response) => {
 };
 
 // named export
-module.exports = {
+export {
   getProducts,
   storeProduct,
   updateProduct,

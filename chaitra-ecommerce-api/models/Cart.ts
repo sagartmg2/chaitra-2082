@@ -1,7 +1,11 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
-const Product = require("./Product");
-const User = require("./User");
+import { DataTypes } from "sequelize";
+import User from "./User";
+
+// const { DataTypes } = require("sequelize");
+// import User = require("./User");
+
+import Product from "./Product";
+import sequelize from "../connections/database";
 
 const Cart = sequelize.define(
   "Cart",
@@ -30,12 +34,10 @@ const Cart = sequelize.define(
   },
   {
     tableName: "carts",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
 
-
-
-module.exports = Cart;
-// export default Cart
+// module.exports = Cart;
+export default Cart;

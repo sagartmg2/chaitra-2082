@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-const Category = require("../models/Category");
+import Category from "../models/Category";
 
 const getCategories = async (req: Request, res: Response) => {
   let categories = await Category.findAll({
@@ -74,7 +74,7 @@ const deleteCategory = async (req: Request, res: Response) => {
 };
 
 // named export
-module.exports = {
+export {
   getCategories,
   storeCategory,
   updateCategory,

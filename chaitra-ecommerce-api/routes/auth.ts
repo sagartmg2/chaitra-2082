@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import express from "express"
 
-const { signup, login } = require("../controllers/auth");
+import { signup, login } from "../controllers/auth";
 const router = express.Router();
 
 router.post("/api/signup-1", (req: Request, res: Response) => {

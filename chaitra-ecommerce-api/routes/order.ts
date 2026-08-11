@@ -1,14 +1,14 @@
-import express from "express"
+import express from "express";
 
-const {
+import  {
   getOrders,
   storeOrder,
   deleteOrder,
   updateOrder,
-  verifyOrder
-} = require("../controllers/order");
+  verifyOrder,
+} from "../controllers/order"
 
-import checkAuthentication from "../middlewares/checkAuthentication"
+import checkAuthentication from "../middlewares/checkAuthentication";
 
 const OrderRouter = express.Router();
 
@@ -19,4 +19,4 @@ OrderRouter.put("/:id", checkAuthentication, updateOrder);
 OrderRouter.delete("/:id", checkAuthentication, deleteOrder);
 
 // module.exports = OrderRouter;
-export default OrderRouter
+export default OrderRouter;

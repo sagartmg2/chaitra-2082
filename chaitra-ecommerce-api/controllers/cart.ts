@@ -1,8 +1,8 @@
 import { Request,Response,NextFunction } from "express";
+import Cart from "../models/Cart";
 
 
-const Cart = require("../models/Cart");
-const Product = require("../models/Product");
+import Product from "../models/Product";
 
 const getCarts = async (req: Request, res:  Response) => {
   let carts = await Cart.findAll({
@@ -70,7 +70,7 @@ const deleteCart = async (req: Request, res:  Response) => {
 };
 
 // named export
-module.exports = {
+export {
   getCarts,
   storeCart,
   updateCart,

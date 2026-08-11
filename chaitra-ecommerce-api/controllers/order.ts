@@ -1,18 +1,17 @@
 import axios from "axios";
 import { Request, Response, NextFunction } from "express";
 
-import { Op } from "sequelize"
-import crypto from "crypto"
+import { Op } from "sequelize";
+import crypto from "crypto";
 
+import Order from "../models/Order";
+import Product from "../models/Product";
+import User from "../models/User";
+import SubOrder from "../models/SubOrder";
+import OrderItem from "../models/OrderItem";
+import Cart from "../models/Cart";
 
-
-const Order = require("../models/Order");
-const Product = require("../models/Product");
-const User = require("../models/User");
-const SubOrder = require("../models/SubOrder");
-const OrderItem = require("../models/OrderItem");
-const Cart = require("../models/Cart");
-const sequelize = require("../connections/database");
+import sequelize from "../connections/database";
 
 const getOrders = async (req: Request, res: Response) => {
   let orders = await Order.findAll({}); // select * from orders
@@ -57,7 +56,9 @@ const storeOrder = async (req: Request, res: Response) => {
       attributes: ["productId", "quantity"],
     });
 
-    let cartProductIds = cartPoducts.map((el: { productId: number }) => el.productId);
+    let cartProductIds = cartPoducts.map((el: InstanceType<typeof Cart>) =>
+      el.getDataValue("productId"),
+    );
 
     let sellers = await User.findAll({
       include: {
@@ -75,33 +76,37 @@ const storeOrder = async (req: Request, res: Response) => {
     for (const seller of sellers) {
       let subOrder = await SubOrder.create(
         {
-          orderId: order.id,
-          sellerId: seller.id,
-          shippingCharge: seller.shippingCharge,
+          orderId: order.getDataValue("id"),
+          sellerId: seller.getDataValue("id"),
+          shippingCharge: seller.getDataValue("shippingCharge"),
         },
         { transaction: t },
       );
 
-      totalShippingCharge += seller.shippingCharge;
+      totalShippingCharge += seller.getDataValue("shippingCharge");
 
       // seller.products.forEach(async (product) => {
-      for (const product of seller.products) {
-        let productQty = cartPoducts.find(
-          (el: { productId: number }) => el.productId == product.id,
-        ).quantity;
+      for (const product of seller.getDataValue("products")) {
+        let productQty =
+          cartPoducts
+            .find(
+              (el: InstanceType<typeof Cart>) =>
+                el.getDataValue("productId") == product.getDataValue("id"),
+            )
+            ?.getDataValue("quantity") ?? 0;
         await OrderItem.create(
           // await OrderItem.bulkCreate(
           {
-            subOrderId: subOrder.id,
-            productId: product.id,
+            subOrderId: subOrder.getDataValue("id"),
+            productId: product.getDataValue("id"),
             quantity: productQty,
-            price: product.price,
-            productName: product.title,
+            price: product.getDataValue("price"),
+            productName: product.getDataValue("title"),
           },
           { transaction: t },
         );
 
-        totalProductPrice += productQty * product.price;
+        totalProductPrice += productQty * product.getDataValue("price");
       }
     }
 
@@ -109,7 +114,7 @@ const storeOrder = async (req: Request, res: Response) => {
 
     let totalAmount = totalProductPrice + totalShippingCharge;
 
-    if ((req.body.paymentMode == "esewa")) {
+    if (req.body.paymentMode == "esewa") {
       let productCode = "EPAYTEST";
       const message = `total_amount=${totalAmount},transaction_uuid=${orderNo},product_code=${productCode}`;
 
@@ -181,7 +186,7 @@ const deleteOrder = async (req: Request, res: Response) => {
 };
 
 const verifyOrder = async (req: Request, res: Response) => {
-  const base64 = req.query.token as string
+  const base64 = req.query.token as string;
   // Decode Base64
   const decodedString = Buffer.from(base64, "base64").toString("utf8");
 
@@ -209,10 +214,4 @@ const verifyOrder = async (req: Request, res: Response) => {
 };
 
 // named export
-module.exports = {
-  getOrders,
-  storeOrder,
-  updateOrder,
-  deleteOrder,
-  verifyOrder,
-};
+export { getOrders, storeOrder, updateOrder, deleteOrder, verifyOrder };

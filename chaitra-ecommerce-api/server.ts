@@ -5,8 +5,10 @@ import express, { Request,Response,NextFunction } from "express"
 
 
 
-require("./models/index");
-const sequelize = require("./connections/database");
+// require("./models/index");
+import ("./models/index.js")
+
+import sequelize from "./connections/database";
 const app = express();
 const port = 4000;
 
@@ -19,6 +21,7 @@ import productRoutes from "./routes/product"
 import OrderRoutes from "./routes/order"
 
 
+// cors
 
 app.use(express.json()); // global middleware : applicable to all api routes |  to read data from req.body
 // app.use(checkAuthentication) // global middelware
@@ -60,5 +63,7 @@ const checkDbConnection = async () => {
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
-  checkDbConnection();
 });
+checkDbConnection();
+
+export default app;

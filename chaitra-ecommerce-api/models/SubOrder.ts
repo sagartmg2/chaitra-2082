@@ -1,7 +1,9 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
-const User = require("./User");
-const Order = require("./Order");
+import { DataTypes } from "sequelize";
+import User from "./User";
+import Order from "./Order";
+
+
+import sequelize from "../connections/database";
 
 const SubOrder = sequelize.define(
   "SubOrder",
@@ -31,9 +33,9 @@ const SubOrder = sequelize.define(
   },
   {
     tableName: "sub_orders",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
 
-module.exports = SubOrder;
+export default SubOrder;

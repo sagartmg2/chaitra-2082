@@ -3,18 +3,19 @@ import express from "express"
 import multer from "multer"
 import path from "path"
 
-const {
+import {
   getProducts,
   storeProduct,
   deleteProduct,
   updateProduct,
-} = require("../controllers/product");
+} from "../controllers/product";
 
 import checkAuthentication from "../middlewares/checkAuthentication";
 // const checkAdmin = require("../middlewares/checkAdmin");
 import checkAdmin from "../middlewares/checkAdmin";
+import Product from "../models/Product";
 
-const Product = require("../models/Product");
+// const Product = require("../models/Product");
 const router = express.Router();
 
 // const storage = multer.diskStorage({

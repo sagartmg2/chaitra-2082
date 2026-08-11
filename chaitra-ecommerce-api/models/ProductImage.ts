@@ -1,6 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
-const Product = require("./Product");
+import { DataTypes } from "sequelize";
+import Product from "./Product";
+
+
+import sequelize from "../connections/database";
 
 const ProductImage = sequelize.define(
   "ProductImage",
@@ -20,9 +22,9 @@ const ProductImage = sequelize.define(
   },
   {
     tableName: "product_images",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
 
-module.exports = ProductImage;
+export default ProductImage;

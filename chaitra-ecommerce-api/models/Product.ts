@@ -1,7 +1,8 @@
-const { DataTypes } = require("sequelize");
-const sequelize = require("../connections/database");
-const User = require("./User");
-const Category = require("./Category");
+import { DataTypes } from "sequelize";
+import User from "./User";
+import Category from "./Category";
+
+import sequelize from "../connections/database";
 
 const Product = sequelize.define(
   "Product",
@@ -43,10 +44,10 @@ const Product = sequelize.define(
   },
   {
     tableName: "products",
-    underscored: "true",
+    underscored: true,
     timestamps: true,
   },
 );
 
-module.exports = Product;
+export default Product;
 // export default User

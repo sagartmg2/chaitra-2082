@@ -1,10 +1,13 @@
-const express = require("express");
-const {
+import express from "express"
+
+
+
+import {
   getCarts,
   storeCart,
   deleteCart,
   updateCart,
-} = require("../controllers/cart");
+} from "../controllers/cart";
 
 import checkAuthentication from "../middlewares/checkAuthentication"
 
