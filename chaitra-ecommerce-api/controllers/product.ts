@@ -57,6 +57,16 @@ const getProducts = async (req: Request, res: Response) => {
     searchTerm = req.query.q as string;
   }
 
+  let categoryCondition: any = {}
+
+  if (categoryIds.length > 0) {
+    categoryCondition = {
+      id: {
+        [Op.in]: categoryIds,
+      },
+    }
+  }
+
   let products = await Product.findAndCountAll({
     where: {
       title: {
@@ -67,11 +77,7 @@ const getProducts = async (req: Request, res: Response) => {
       {
         model: Category,
         as: "category",
-        where: {
-          id: {
-            [Op.in]: categoryIds,
-          },
-        },
+        where: categoryCondition,
       },
       {
         model: ProductImage,
