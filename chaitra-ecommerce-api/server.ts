@@ -1,20 +1,16 @@
 // require("dotenv").config();
-// import 'dotenv/config'
+import 'dotenv/config'
 // const express = require("express");
-import express, { Request, Response, NextFunction } from "express";
+import express, { Request,Response,NextFunction } from "express"
 
-// // require("./models/index");
-// import ("./models/index.js")
 
-// import sequelize from "./connections/database";
+
+// require("./models/index");
+import ("./models/index.js")
+
+import sequelize from "./connections/database";
 const app = express();
 const port = 4000;
-
-app.get("/api", (_req, res) => {
-  res.send("welcome to chaitra ecommerce apiiii !");
-});
-
-/* 
 
 
 // const authRoutes = require("./routes/auth");
@@ -65,14 +61,9 @@ const checkDbConnection = async () => {
   }
 };
 
-*/
-
-if (process.env.NODE_ENV !== "production") {
-  app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`);
-  });
-}
-
-// checkDbConnection();
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
+});
+checkDbConnection();
 
 export default app;
